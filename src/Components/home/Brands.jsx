@@ -18,7 +18,7 @@ const BrandsMarquee = () => {
 
     return (
         <section className="py-24 bg-white dark:bg-slate-950 border-y border-slate-100 dark:border-slate-800 overflow-hidden">
-            <div className="container mx-auto px-6 max-w-[1860px] mb-16 text-center">
+            <div className="container mx-auto px-6 max-w-465 mb-16 text-center">
                 <motion.span 
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
@@ -26,26 +26,25 @@ const BrandsMarquee = () => {
                 >
                     Global Partners
                 </motion.span>
-                <h2 className="text-4xl md:text-6xl font-serif italic text-slate-900 dark:text-white leading-tight">
-                    Shop Your <span className="text-blue-600 font-sans not-italic font-black uppercase">Favorite</span> Brands
+                <h2 className="text-4xl md:text-6xl font-serif  text-slate-900 dark:text-white leading-tight">
+                    Shop Your <span className="text-blue-600 font-sans font-black uppercase">Favorite</span> Brands
                 </h2>
             </div>
 
             {/* Marquee Container */}
             <div className="relative flex items-center group">
                 {/* Visual Fading Masks */}
-                <div className="absolute left-0 top-0 w-48 h-full bg-gradient-to-r from-white dark:from-slate-950 to-transparent z-10 pointer-events-none" />
-                <div className="absolute right-0 top-0 w-48 h-full bg-gradient-to-l from-white dark:from-slate-950 to-transparent z-10 pointer-events-none" />
+                <div className="absolute left-0 top-0 w-48 h-full bg-linear-to-r from-white dark:from-slate-950 to-transparent z-10 pointer-events-none" />
+                <div className="absolute right-0 top-0 w-48 h-full bg-linear-to-l from-white dark:from-slate-950 to-transparent z-10 pointer-events-none" />
 
                 <motion.div 
                     className="flex whitespace-nowrap gap-20 md:gap-32 items-center"
                     animate={{ x: ["0%", "-50%"] }}
                     transition={{
-                        duration: 40, // Adjust speed here (higher = slower)
+                        duration: 40,
                         ease: "linear",
                         repeat: Infinity,
                     }}
-                    // Optional: Pause on hover to allow users to read specific brands
                     whileHover={{ transition: { duration: 60 } }} 
                 >
                     {doubledBrands.map((brand, i) => (
@@ -54,7 +53,7 @@ const BrandsMarquee = () => {
                                 className={`text-3xl md:text-5xl font-black tracking-tighter transition-all duration-300 cursor-default
                                     ${brand === "NIKE" || brand === "ADIDAS" || brand === "PUMA" 
                                         ? "font-sans text-slate-900 dark:text-white opacity-100 scale-110" 
-                                        : "font-serif italic text-slate-300 dark:text-slate-700 hover:text-blue-600"
+                                        : "font-serif  text-slate-300 dark:text-slate-700 hover:text-blue-600"
                                     }`}
                             >
                                 {brand}

@@ -7,7 +7,7 @@ import { FaAward, FaLeaf, FaUsers } from 'react-icons/fa';
 const OurStory = () => {
     return (
         <section className="py-24 bg-slate-50 dark:bg-slate-900/50 overflow-hidden">
-            <div className="container mx-auto px-6 max-w-[1860px]">
+            <div className="container mx-auto px-5 md:px-10 max-w-465 xl:px-20">
                 <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
                     
                     {/* Left Side: Visuals */}

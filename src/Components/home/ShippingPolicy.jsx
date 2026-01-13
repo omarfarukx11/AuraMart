@@ -7,7 +7,7 @@ import { FaTruck, FaGlobeAmericas, FaBoxOpen, FaClock, FaCheckCircle, FaUndoAlt 
 const ShippingPolicy = () => {
     return (
         <section className="py-24 bg-white dark:bg-slate-950">
-            <div className="container mx-auto px-6 max-w-465">
+            <div className="container mx-auto px-5 md:px-10 xl:px-20 max-w-465">
                 
                 {/* Header Section */}
                 <div className="text-center mb-20 ">

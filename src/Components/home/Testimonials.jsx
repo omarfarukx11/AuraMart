@@ -46,7 +46,7 @@ const Testimonials = () => {
                     {duplicatedTestimonials.map((item, index) => (
                         <div
                             key={index}
-                            className="w-100 shrink-0 bg-slate-50 dark:bg-slate-900 p-8 rounded-xl border border-slate-100 dark:border-slate-800 transition-all duration-300 hover:shadow-xl"
+                            className="w-100 shrink-0 bg-slate-50 dark:bg-slate-900 p-8 rounded-xl border border-slate-100 dark:border-slate-800 transition-all duration-300 "
                         >
                             <div className="flex gap-1 mb-4 text-yellow-400">
                                 {[...Array(5)].map((_, i) => (

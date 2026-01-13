@@ -10,18 +10,19 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState(true); // Mock auth
 
-  // Your JSX fragment links
+
   const links = (
     <>
       <li><Link href="/" > Home </Link></li>
       <li><Link href="/product">Products</Link></li>
       <li><Link href="/about">About</Link></li>
+      <li><Link href="/contact">Contact</Link></li>
     </>
   );
 
   return (
     <nav className="bg-white text-gray-900 shadow-md ">
-      <div className="max-w-465 mx-auto px-4 lg:px-15">
+      <div className="max-w-465 mx-auto px-5 xl:px-20 md:px-10">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="shrink-0">
@@ -38,10 +39,10 @@ const Navbar = () => {
             <div className="flex items-center gap-4 ml-4 border-l pl-6 border-gray-200">
               {user ? (
                 <Link
-                  href="/dashboard"
-                  className="bg-black text-white px-6 py-2.5 rounded-full text-sm font-bold hover:bg-gray-800 transition"
+                  href="/login"
+                  className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
                 >
-                  Dashboard
+                  Sing In
                 </Link>
               ) : (
                 <Link

@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FiChevronDown, FiPlus, FiMinus } from 'react-icons/fi';
+import Link from 'next/link';
 
 const faqs = [
     {
@@ -35,8 +36,8 @@ const FAQ = () => {
     };
 
     return (
-        <section className="py-24 bg-white dark:bg-slate-950 xl:px-20 lg:px-10 px-5">
-            <div className="container mx-auto px-6 max-w-465">
+        <section className="py-24 bg-white dark:bg-slate-950 ">
+            <div className="container mx-auto  max-w-465 xl:px-20 lg:px-10 px-5">
                 
                 <div className="grid lg:grid-cols-12 gap-16">
                     
@@ -55,9 +56,9 @@ const FAQ = () => {
                         <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">
                             Can't find what you're looking for? Reach out to our 24/7 support team for personalized assistance.
                         </p>
-                        <button className="px-8 py-4 border-2 border-slate-900 dark:border-white dark:text-white font-bold rounded-xl hover:bg-slate-900 hover:text-white dark:hover:bg-white dark:hover:text-black transition-all">
+                        <Link href={'/contact'} className="group relative px-8 py-5 bg-blue-600 text-white rounded-xl font-bold text-lg overflow-hidden transition-all hover:bg-green-400 ">
                             Contact Support
-                        </button>
+                        </Link>
                     </div>
 
                     {/* Right Side: Accordion */}

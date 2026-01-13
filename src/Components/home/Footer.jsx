@@ -18,7 +18,7 @@ const Footer = () => {
     return (
         <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 pt-20 pb-10">
             {/* Updated to match your 1860px design requirement */}
-            <div className="container mx-auto px-6 max-w-[1860px]">
+            <div className="container mx-auto px-5 lg:px-10 xl:px-20 max-w-465">
                 
                 {/* Top Section: Brand & Navigation */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
