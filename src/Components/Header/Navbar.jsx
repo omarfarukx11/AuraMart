@@ -25,8 +25,8 @@ const Navbar = () => {
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="shrink-0">
-            <Link href="/" className="text-2xl font-black tracking-tighter text-blue-600">
-              BRAND
+            <Link href="/" className="text-2xl font-black tracking-tighter text-blue-600 uppercase">
+              AuraMart
             </Link>
           </div>
 

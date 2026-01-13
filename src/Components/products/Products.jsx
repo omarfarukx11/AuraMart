@@ -7,8 +7,8 @@ const Products =  async () => {
     const products = (await getProducts()) || []
     return (
         <div className='max-w-465 mx-auto py-20 px-20'>
-           <h1 className='text-5xl text-center font-bold mb-10'>Our Products</h1>
-           <div className='grid grid-cols-1 grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 my-20'>
+           <h1 className='text-5xl text-center font-bold mb-10'>Our Featured Products</h1>
+           <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-8 my-20'>
             {
             products.map((product ) => <ProductCard key={product._id} product={product}></ProductCard>)
            }
