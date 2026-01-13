@@ -3,7 +3,8 @@ import Image from 'next/image';
 
 
 const ProductDetails = async ({ params }) => {
-  const { id } = params;
+  const { id } = await params;
+
   const product = await getSingleProduct(id);
 
   if (!product || !product.title) {

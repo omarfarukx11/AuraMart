@@ -90,13 +90,10 @@ const ProductCard = ({ product }) => {
         </p>
 
         {/* Action Button */}
-        <button className="w-full mt-3 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-xl font-semibold transition cursor-pointer">
-            <Link href={`/product/${_id}`}
-          
-        >
-          view Details
-        </Link>
-        </button>
+        <div className='btn btn-primary'>
+            <Link href={`/product/${_id}`}>view Details</Link>
+        </div>
+
       </div>
     </div>
 

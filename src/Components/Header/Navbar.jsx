@@ -14,13 +14,13 @@ const Navbar = () => {
   const links = (
     <>
       <li><Link href="/" > Home </Link></li>
-      <li><Link href="/product">Product</Link></li>
+      <li><Link href="/product">Products</Link></li>
       <li><Link href="/about">About</Link></li>
     </>
   );
 
   return (
-    <nav className="bg-white text-gray-900 shadow-md fixed w-full top-0 z-50 ">
+    <nav className="bg-white text-gray-900 shadow-md ">
       <div className="max-w-465 mx-auto px-4 lg:px-15">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
