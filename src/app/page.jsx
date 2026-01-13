@@ -3,6 +3,7 @@ import Hero from "@/Components/home/Hero";
 import Integrations from "@/Components/home/Integrations";
 import Pricing from "@/Components/home/Pricing";
 import Team from "@/Components/home/Team";
+import Products from "@/Components/products/Products";
 import Image from "next/image";
 
 export default function Home() {
@@ -10,6 +11,7 @@ export default function Home() {
     <div >
      <section>
       <Hero></Hero>
+      <Products></Products>
       <Benefits></Benefits>
       <Pricing></Pricing>
       <Integrations></Integrations>

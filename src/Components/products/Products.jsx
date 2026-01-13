@@ -1,0 +1,21 @@
+import React from 'react';
+import { getProducts } from '@/actions/server/product';
+import ProductCard from './ProductCard';
+
+
+const Products =  async () => {
+    const products = (await getProducts()) || []
+    return (
+        <div className='max-w-465 mx-auto py-20'>
+           <h1 className='text-5xl text-center font-bold mb-10'>Our Products</h1>
+           <div className='grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8 my-20'>
+            {
+            products.map((product ) => <ProductCard key={product._id} product={product}></ProductCard>)
+           }
+           </div>
+           
+        </div>
+    );
+};
+
+export default Products;

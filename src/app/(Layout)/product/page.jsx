@@ -1,11 +1,12 @@
+import Products from '@/Components/products/Products';
 import React from 'react';
 
-const Products = () => {
+const AllProducts = () => {
     return (
         <div>
-            <h1>hello from product</h1>
+           <Products></Products>
         </div>
     );
 };
 
-export default Products;
+export default AllProducts;
