@@ -67,7 +67,7 @@ const ProductCard = ({ product }) => {
       </div>
 
       {/* --- Product Content --- */}
-      <div className="p-5 flex-grow flex flex-col">
+      <div className="p-5 grow flex flex-col">
         <div className="flex justify-between items-center">
           <span className="text-xs font-semibold text-sky-600 dark:text-sky-400 uppercase tracking-widest">
             {category}

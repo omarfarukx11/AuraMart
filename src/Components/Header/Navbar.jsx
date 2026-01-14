@@ -1,5 +1,7 @@
 "use client";
 
+
+import Cookies from 'js-cookie';
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React, { useState } from "react";
@@ -8,7 +10,7 @@ import { FaBars, FaTimes } from "react-icons/fa";
 const Navbar = () => {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState(true); // Mock auth
+
 
 
   const links = (
@@ -19,6 +21,8 @@ const Navbar = () => {
       <li><Link href="/contact">Contact</Link></li>
     </>
   );
+
+const isAuth = Cookies.get('auth');
 
   return (
     <nav className="bg-white text-gray-900 shadow-md ">
@@ -37,17 +41,17 @@ const Navbar = () => {
 
             {/* Auth Actions */}
             <div className="flex items-center gap-4 ml-4 border-l pl-6 border-gray-200">
-              {user ? (
+              {isAuth ? (
                 <Link
-                  href="/login"
+                  href="/"
                   className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
                 >
-                  Sing In
+                  Dashbord
                 </Link>
               ) : (
                 <Link
                   href="/login"
-                  className="text-sm font-bold px-6 py-2.5 border border-gray-300 rounded-full hover:bg-gray-50 transition"
+                  className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
                 >
                   Login
                 </Link>
@@ -79,11 +83,11 @@ const Navbar = () => {
 
           {/* Auth */}
           <div className="pt-4 border-t border-gray-200">
-            {user ? (
+            {isAuth ? (
               <Link
                 href="/dashboard"
                 onClick={() => setIsOpen(false)}
-                className="block text-center bg-blue-600 text-white p-4 rounded-xl font-bold"
+                className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
               >
                 Dashboard
               </Link>
@@ -91,7 +95,7 @@ const Navbar = () => {
               <Link
                 href="/login"
                 onClick={() => setIsOpen(false)}
-                className="block text-center border border-gray-300 p-4 rounded-xl font-bold"
+                className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
               >
                 Login
               </Link>
