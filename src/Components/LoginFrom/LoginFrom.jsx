@@ -6,32 +6,39 @@ import { motion } from "framer-motion";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import { FaGoogle, FaFacebookF } from "react-icons/fa";
 import LoginImage from "../../../public/tomasz-gawlowski-YDZPdqv3FcA-unsplash.jpg";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation"; 
+
 const LoginFrom = () => {
   const router = useRouter();
+  const searchParams = useSearchParams()
   const [passwordVisible, setPasswordVisible] = useState(false);
+
+
+  const redirectTo = searchParams.get("redirect") || "/";
 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-const handleMockSignIn = (e) => {
+  const handleMockSignIn = (e) => {
     e.preventDefault();
     const from = e.target;
     const email = from.email.value;
     const password = from.password.value;
 
     if (email === "admin@gmail.com" && password === "admin@1") {
-        document.cookie = "auth=true; path=/";
-        
-        window.dispatchEvent(new Event("authChange"));
+      document.cookie = "auth=true; path=/";
+      
+      window.dispatchEvent(new Event("authChange"));
 
-        router.push("/");
-        alert("Login successful");
+
+      router.push(redirectTo);
+      alert("Login successful");
     } else {
-        alert("Invalid credentials");
+      alert("Invalid credentials");
     }
-};
+  };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950">
       <div className="relative flex flex-col m-6 space-y-8 bg-white dark:bg-slate-900 shadow-2xl rounded-2xl md:flex-row md:space-y-0">
@@ -147,9 +154,9 @@ const handleMockSignIn = (e) => {
           className="relative hidden md:block"
         >
           <img
-            src={LoginImage.src} // Use .src here
+            src={LoginImage.src}
             alt="AuraMart branding"
-            className="w-[400px] h-full rounded-r-2xl object-cover block" // Removed 'hidden'
+            className="w-[400px] h-full rounded-r-2xl object-cover block"
           />
           <div className="absolute inset-0 bg-linear-to-t from-black/20 to-transparent rounded-r-2xl"></div>
         </motion.div>

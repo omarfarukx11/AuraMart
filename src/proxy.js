@@ -1,17 +1,20 @@
-import { NextResponse } from 'next/server'
+import { NextResponse } from 'next/server';
 
-// This function can be marked `async` if using `await` inside
 export function proxy(request) {
-    const isLoggedin = request.cookies.get("auth")?.value == "true";
+  const authCookie = request.cookies.get('auth');
+  const url = request.nextUrl.clone(); 
 
-    if (!isLoggedin) {
-        return NextResponse.redirect(new URL('/login', request.url))
-    }
+  if (!authCookie) {
+    const loginUrl = new URL('/login', request.url);
 
-    return NextResponse.next();
+    loginUrl.searchParams.set('redirect', request.nextUrl.pathname); 
+    
+    return NextResponse.redirect(loginUrl);
+  }
+
+  return NextResponse.next();
 }
-
 
 export const config = {
-    matcher: '/dashboard/:path*',
-}
+  matcher: ['/dashboard/:path*', '/cart'],
+};

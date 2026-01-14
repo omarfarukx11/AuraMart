@@ -1,18 +1,28 @@
-"use client";
 import React from 'react';
 import Link from 'next/link';
+import { getUserCart } from '@/actions/server/addToCart';
+import { cookies } from 'next/headers';
 
-const CartPage = () => {
-    // This is sample data - usually, you would get this from your Cart Context or LocalStorage
-    const cartItems = [
-        { id: 1, name: "Premium Leather Watch", price: 120, qty: 1, image: "https://via.placeholder.com/100" },
-        { id: 2, name: "Wireless Earbuds Pro", price: 85, qty: 2, image: "https://via.placeholder.com/100" },
-    ];
+const CartPage = async () => {
+    // 1. Get user info (In a real app, decode your auth cookie)
+    const userEmail = "admin@gmail.com"; 
+    
+    // 2. Fetch real data from MongoDB
+    const cartItems = await getUserCart(userEmail);
 
-    const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.qty), 0);
+    const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+
+    if (cartItems.length === 0) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center">
+                <h2 className="text-2xl font-bold">Your cart is empty</h2>
+                <Link href="/products" className="text-blue-600 mt-4 underline">Go Shopping</Link>
+            </div>
+        );
+    }
 
     return (
-        <div className="bg-white p-5 min-h-screen pt-30 box-border rounded-lg">
+        <div className="bg-white p-5 min-h-screen pt-32 box-border rounded-lg">
             <div className="max-w-7xl mx-auto px-4">
                 <h1 className="text-3xl font-bold mb-8">Your Shopping Cart</h1>
 
@@ -21,20 +31,25 @@ const CartPage = () => {
                     <div className="col-span-12 lg:col-span-8">
                         <div className="border-t border-gray-200">
                             {cartItems.map((item) => (
-                                <div key={item.id} className="flex py-6 border-b border-gray-100 items-center justify-between">
+                                <div key={item._id} className="flex py-6 border-b border-gray-100 items-center justify-between">
                                     <div className="flex items-center gap-4">
-                                        <img src={item.image} alt={item.name} className="w-20 h-20 rounded-lg object-cover bg-gray-100" />
+                                        <img 
+                                            src={item.image} 
+                                            alt={item.title} 
+                                            className="w-20 h-20 rounded-lg object-cover bg-gray-100" 
+                                        />
                                         <div>
-                                            <h3 className="font-semibold text-lg">{item.name}</h3>
-                                            <p className="text-gray-500 text-sm">Size: Medium | Color: Blue</p>
+                                            <h3 className="font-semibold text-lg">{item.title}</h3>
+                                            <p className="text-gray-500 text-sm">Quantity: {item.quantity}</p>
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-bold text-lg">${item.price * item.qty}</p>
+                                        <p className="font-bold text-lg">${(item.price * item.quantity).toFixed(2)}</p>
                                         <div className="flex items-center gap-3 mt-2 border rounded-lg px-2 py-1 justify-center">
-                                            <button className="text-gray-500 hover:text-black">-</button>
-                                            <span className="font-medium text-sm">{item.qty}</span>
-                                            <button className="text-gray-500 hover:text-black">+</button>
+                                            {/* These buttons will need a Client Component to handle clicks */}
+                                            <button className="text-gray-400 hover:text-black">-</button>
+                                            <span className="font-medium text-sm">{item.quantity}</span>
+                                            <button className="text-gray-400 hover:text-black">+</button>
                                         </div>
                                     </div>
                                 </div>
@@ -57,10 +72,6 @@ const CartPage = () => {
                                 <div className="flex justify-between text-gray-600">
                                     <span>Shipping</span>
                                     <span className="text-green-600 font-medium">Free</span>
-                                </div>
-                                <div className="flex justify-between text-gray-600">
-                                    <span>Tax</span>
-                                    <span>$0.00</span>
                                 </div>
                                 <hr className="border-gray-200" />
                                 <div className="flex justify-between text-xl font-bold">
