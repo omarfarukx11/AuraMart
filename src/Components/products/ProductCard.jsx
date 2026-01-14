@@ -108,7 +108,7 @@ const ProductCard = ({ product }) => {
       {/* --- View Details Button --- */}
       <div className="border-t border-slate-100 dark:border-slate-800">
         <Link 
-            href={`/product/${_id}`}
+            href={`/products/${_id}`}
             className="block w-full py-3 text-center text-sm font-bold text-sky-600 dark:text-sky-400 uppercase tracking-widest
                        hover:bg-sky-500 hover:text-white dark:hover:bg-sky-500 dark:hover:text-white transition-colors duration-300"
         >

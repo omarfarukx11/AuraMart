@@ -13,7 +13,7 @@ import Products from "@/Components/products/Products";
 export default function Home() {
   return (
     <div >
-     <section>
+     <section className="min-h-[calc(100vh-100px)] pt-20">
       <HeroBanner></HeroBanner>
       <Products></Products>
       <OurStory></OurStory>

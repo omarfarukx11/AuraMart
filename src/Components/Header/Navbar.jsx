@@ -1,28 +1,56 @@
 "use client";
 
-
 import Cookies from 'js-cookie';
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import React, { useState } from "react";
-import { FaBars, FaTimes } from "react-icons/fa";
+import { usePathname, useRouter } from "next/navigation";
+import React, { useState, useEffect } from "react";
+import { FaBars, FaTimes, FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
 
 const Navbar = () => {
   const pathname = usePathname();
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isAuth, setIsAuth] = useState(false);
 
+  // Function to sync auth state
+  const checkAuth = () => {
+    const auth = Cookies.get('auth');
+    setIsAuth(!!auth);
+  };
 
+  useEffect(() => {
+    // Initial check
+    checkAuth();
+
+    // Listen for custom "authChange" event from Login Form
+    window.addEventListener("authChange", checkAuth);
+
+    return () => {
+      window.removeEventListener("authChange", checkAuth);
+    };
+  }, []);
+
+  const handleLogout = () => {
+    Cookies.remove('auth');
+    setIsAuth(false);
+    
+    // Broadcast change so other components update instantly
+    window.dispatchEvent(new Event("authChange"));
+    
+    router.push('/');
+    router.refresh();
+  };
+
+  if (pathname.startsWith('/dashboard')) return <></>;
 
   const links = (
     <>
-      <li><Link href="/" > Home </Link></li>
-      <li><Link href="/product">Products</Link></li>
-      <li><Link href="/about">About</Link></li>
-      <li><Link href="/contact">Contact</Link></li>
+      <li><Link href="/" onClick={() => setIsOpen(false)}> Home </Link></li>
+      <li><Link href="/products" onClick={() => setIsOpen(false)}>Products</Link></li>
+      <li><Link href="/about" onClick={() => setIsOpen(false)}>About</Link></li>
+      <li><Link href="/contact" onClick={() => setIsOpen(false)}>Contact</Link></li>
     </>
   );
-
-const isAuth = Cookies.get('auth');
 
   return (
     <nav className="bg-white text-gray-900 shadow-md ">
@@ -35,39 +63,58 @@ const isAuth = Cookies.get('auth');
             </Link>
           </div>
 
-          {/* Desktop Menu */}
-          <div className="hidden lg:flex items-center gap-8">
-            <ul className="flex items-center gap-4 list-none">{links}</ul>
+          {/* RIGHT SECTION: Cart + Auth + Toggle */}
+          <div className="flex items-center gap-4">
+            
+            {/* Desktop Nav Links */}
+            <div className="hidden lg:flex items-center gap-8">
+              <ul className="flex items-center gap-4 list-none">{links}</ul>
+            </div>
+
+            {/* Cart Icon */}
+            <Link href="/cart" className="relative p-2 text-gray-700 hover:text-blue-600 transition-all">
+              <FaShoppingCart size={22} />
+              <span className="absolute top-0 right-0 transform translate-x-1 -translate-y-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white shadow-sm">
+                0
+              </span>
+            </Link>
 
             {/* Auth Actions */}
-            <div className="flex items-center gap-4 ml-4 border-l pl-6 border-gray-200">
+            <div className="flex items-center border-l pl-4 border-gray-200 gap-3">
               {isAuth ? (
-                <Link
-                  href="/"
-                  className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
-                >
-                  Dashbord
-                </Link>
+                <>
+                  <Link
+                    href="/dashboard"
+                    className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg overflow-hidden transition-all"
+                  >
+                    Dashboard
+                  </Link>
+                  <button 
+                    onClick={handleLogout}
+                    className="hidden lg:block p-2 text-gray-500 hover:text-red-600 transition-colors"
+                  >
+                    <FaSignOutAlt size={20} />
+                  </button>
+                </>
               ) : (
                 <Link
                   href="/login"
-                  className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
+                  className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg overflow-hidden transition-all"
                 >
                   Login
                 </Link>
               )}
             </div>
-          </div>
 
-          {/* Mobile Toggle */}
-          <div className="lg:hidden flex items-center">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 text-2xl transition-transform active:scale-90 focus:outline-none"
-              aria-label="Toggle menu"
-            >
-              {isOpen ? <FaTimes /> : <FaBars />}
-            </button>
+            {/* Mobile Toggle */}
+            <div className="lg:hidden flex items-center">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 text-2xl transition-transform active:scale-90 focus:outline-none"
+              >
+                {isOpen ? <FaTimes /> : <FaBars />}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -75,32 +122,25 @@ const isAuth = Cookies.get('auth');
       {/* Mobile Menu Dropdown */}
       <div
         className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-gray-50 border-t ${
-          isOpen ? "max-h-80 opacity-100" : "max-h-0 opacity-0"
+          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
-        <div className="px-4 py-6 space-y-3">
-          <ul className="flex flex-col gap-2 list-none">{links}</ul>
-
-          {/* Auth */}
-          <div className="pt-4 border-t border-gray-200">
-            {isAuth ? (
-              <Link
-                href="/dashboard"
-                onClick={() => setIsOpen(false)}
-                className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
+        <div className="px-4 py-6 space-y-4">
+          <ul className="flex flex-col gap-4 list-none font-medium text-lg">
+            {links}
+          </ul>
+          
+          {isAuth && (
+            <div className="pt-4 border-t border-gray-200">
+              <button 
+                onClick={handleLogout}
+                className="flex items-center gap-3 text-red-600 font-bold text-lg w-full py-2 hover:bg-red-50 rounded-lg transition-all"
               >
-                Dashboard
-              </Link>
-            ) : (
-              <Link
-                href="/login"
-                onClick={() => setIsOpen(false)}
-                className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-lg overflow-hidden transition-all"
-              >
-                Login
-              </Link>
-            )}
-          </div>
+                <FaSignOutAlt />
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </nav>

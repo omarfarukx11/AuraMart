@@ -1,5 +1,5 @@
 'use client';
-
+import { usePathname } from "next/navigation";
 import React from 'react';
 // Importing specific icons from react-icons
 import { 
@@ -14,6 +14,8 @@ import { IoLocationOutline } from 'react-icons/io5';
 
 const Footer = () => {
     const currentYear = new Date().getFullYear();
+      const pathname = usePathname();
+    if(pathname.startsWith('/dashboard')) return <></>
 
     return (
         <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 pt-20 pb-10">
