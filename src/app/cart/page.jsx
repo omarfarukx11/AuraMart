@@ -1,13 +1,10 @@
 import React from 'react';
 import Link from 'next/link';
 import { getUserCart } from '@/actions/server/addToCart';
-import { cookies } from 'next/headers';
+import CartQuantityBtn from '@/Components/AddToCard/CartQuantityBtn';
 
 const CartPage = async () => {
-    // 1. Get user info (In a real app, decode your auth cookie)
     const userEmail = "admin@gmail.com"; 
-    
-    // 2. Fetch real data from MongoDB
     const cartItems = await getUserCart(userEmail);
 
     const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
@@ -15,8 +12,8 @@ const CartPage = async () => {
     if (cartItems.length === 0) {
         return (
             <div className="min-h-screen flex flex-col items-center justify-center">
-                <h2 className="text-2xl font-bold">Your cart is empty</h2>
-                <Link href="/products" className="text-blue-600 mt-4 underline">Go Shopping</Link>
+                <h2 className="text-2xl font-bold text-gray-400">Your cart is empty</h2>
+                <Link href="/products" className="text-blue-600 mt-4 hover:underline">← Go Shopping</Link>
             </div>
         );
     }
@@ -27,7 +24,6 @@ const CartPage = async () => {
                 <h1 className="text-3xl font-bold mb-8">Your Shopping Cart</h1>
 
                 <div className="grid grid-cols-12 gap-10">
-                    {/* Item List */}
                     <div className="col-span-12 lg:col-span-8">
                         <div className="border-t border-gray-200">
                             {cartItems.map((item) => (
@@ -36,53 +32,47 @@ const CartPage = async () => {
                                         <img 
                                             src={item.image} 
                                             alt={item.title} 
-                                            className="w-20 h-20 rounded-lg object-cover bg-gray-100" 
+                                            className="w-24 h-24 rounded-lg object-cover bg-gray-50 border" 
                                         />
                                         <div>
                                             <h3 className="font-semibold text-lg">{item.title}</h3>
-                                            <p className="text-gray-500 text-sm">Quantity: {item.quantity}</p>
+                                            <p className="text-gray-400 text-sm mt-1">Unit Price: ${item.price}</p>
                                         </div>
                                     </div>
                                     <div className="text-right">
-                                        <p className="font-bold text-lg">${(item.price * item.quantity).toFixed(2)}</p>
-                                        <div className="flex items-center gap-3 mt-2 border rounded-lg px-2 py-1 justify-center">
-                                            {/* These buttons will need a Client Component to handle clicks */}
-                                            <button className="text-gray-400 hover:text-black">-</button>
-                                            <span className="font-medium text-sm">{item.quantity}</span>
-                                            <button className="text-gray-400 hover:text-black">+</button>
-                                        </div>
+                                        <p className="font-bold text-xl">${(item.price * item.quantity).toFixed(2)}</p>
+                                        <CartQuantityBtn item={item} userEmail={userEmail} />
                                     </div>
                                 </div>
                             ))}
                         </div>
-                        <Link href="/products" className="inline-block mt-6 text-blue-600 hover:underline">
+                        <Link href="/products" className="inline-block mt-8 text-blue-600 font-medium hover:underline">
                             ← Continue Shopping
                         </Link>
                     </div>
 
-                    {/* Order Summary Sidebar */}
                     <div className="col-span-12 lg:col-span-4">
-                        <div className="bg-gray-50 rounded-2xl p-6 border border-gray-100">
+                        <div className="bg-gray-50 rounded-2xl p-8 border border-gray-100 sticky top-32">
                             <h2 className="text-xl font-bold mb-6">Order Summary</h2>
                             <div className="space-y-4">
                                 <div className="flex justify-between text-gray-600">
                                     <span>Subtotal</span>
-                                    <span>${subtotal.toFixed(2)}</span>
+                                    <span className="font-semibold">${subtotal.toFixed(2)}</span>
                                 </div>
                                 <div className="flex justify-between text-gray-600">
                                     <span>Shipping</span>
-                                    <span className="text-green-600 font-medium">Free</span>
+                                    <span className="text-green-600 font-bold tracking-wide">FREE</span>
                                 </div>
-                                <hr className="border-gray-200" />
-                                <div className="flex justify-between text-xl font-bold">
+                                <hr className="border-gray-200 my-4" />
+                                <div className="flex justify-between text-2xl font-black">
                                     <span>Total</span>
                                     <span>${subtotal.toFixed(2)}</span>
                                 </div>
                             </div>
 
-                            <button className="w-full bg-black text-white py-4 rounded-xl mt-8 font-bold hover:bg-gray-800 transition-all uppercase tracking-wide">
+                            {/* <button className="w-full bg-blue-600 text-white py-4 rounded-xl mt-8 font-bold hover:bg-blue-700 transition-all shadow-lg active:scale-[0.98]">
                                 Proceed to Checkout
-                            </button>
+                            </button> */}
                         </div>
                     </div>
                 </div>

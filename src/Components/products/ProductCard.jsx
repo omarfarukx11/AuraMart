@@ -29,13 +29,12 @@ const ProductCard = ({ product }) => {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="group relative flex flex-col bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 rounded-2xl shadow-sm hover:shadow-xl dark:hover:shadow-black/20 transition-all duration-300 overflow-hidden"
     >
-      {/* --- Image & Hover Action Container (Reduced Height) --- */}
+
       <div className="relative w-full h-72 bg-slate-100 dark:bg-slate-800 overflow-hidden">
         <Link href={`/product/${_id}`} aria-label={`View details for ${title}`}>
-          <Image
+          <img
             src={image}
             alt={title}
-            fill
             className="object-cover w-full h-full group-hover:scale-105 transition-transform duration-500 ease-in-out"
           />
         </Link>
@@ -55,7 +54,7 @@ const ProductCard = ({ product }) => {
         </div>
 
         {/* Wishlist Heart Icon */}
-        <motion.button
+        {/* <motion.button
           whileHover={{ scale: 1.1, backgroundColor: '#E11D48', color: '#FFFFFF' }}
           whileTap={{ scale: 0.9 }}
           transition={{ duration: 0.2 }}
@@ -63,7 +62,7 @@ const ProductCard = ({ product }) => {
           aria-label="Add to Wishlist"
         >
           <FaRegHeart size={20} />
-        </motion.button>
+        </motion.button> */}
       </div>
 
       {/* --- Product Content --- */}

@@ -28,18 +28,17 @@ const ProductDetails = async ({ product }) => {
     : 0;
 
   return (
-    <section className="container mx-auto px-6 py-16">
+    <section className="container mx-auto px-6 py-32 mt-20">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
 
         {/* Product Image */}
         <div className="relative bg-gray-100 dark:bg-slate-800 rounded-2xl p-10">
-          <Image
+          <img
             src={image}
             alt={title}
             width={500}
             height={500}
             className="object-contain mx-auto"
-            priority
           />
 
           {discount > 0 && (

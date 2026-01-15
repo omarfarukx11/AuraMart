@@ -15,7 +15,10 @@ export default function Home() {
     <div >
      <section className="min-h-[calc(100vh-100px)] pt-20">
       <HeroBanner></HeroBanner>
-      <Products></Products>
+      <div>
+        <h1 className="text-5xl text-center py-30 font-bold ">Our Feauter Product</h1>
+        <Products></Products>
+      </div>
       <OurStory></OurStory>
       <ShippingPolicy></ShippingPolicy>
       <Brands></Brands>

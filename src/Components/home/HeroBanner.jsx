@@ -24,7 +24,7 @@ const HeroBanner = () => {
         <section className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden bg-slate-950">
             <div className="absolute inset-0 z-0">
                 <img 
-                    src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?q=80&w=2070&auto=format&fit=crop" 
+                    src="https://i.ibb.co.com/pjndBNm2/shirt-mockup-concept-with-plain-clothing.jpg" 
                     alt="AuraMart Banner" 
                     className="w-full h-full object-cover opacity-60 dark:opacity-40"
                 />
@@ -73,7 +73,7 @@ const HeroBanner = () => {
                         variants={itemVariants}
                         className="flex flex-col sm:flex-row gap-5"
                     >
-                        <Link href={'/product'} className="group relative px-8 py-5 bg-blue-600 text-white rounded-xl font-bold text-lg overflow-hidden transition-all hover:pr-12">
+                        <Link href={'/products'} className="group relative px-8 py-5 bg-blue-600 text-white rounded-xl font-bold text-lg overflow-hidden transition-all hover:pr-12">
                             <span className="relative z-10 flex items-center gap-2">
                                 Explore Collection <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                             </span>

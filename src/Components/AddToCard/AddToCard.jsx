@@ -4,11 +4,28 @@ import React, { useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 import Cookies from 'js-cookie';
 import { addItemToUserCart } from '@/actions/server/addToCart';
+import Swal from 'sweetalert2'; // 1. Import SweetAlert
 
 const AddToCart = ({ product }) => {
   const router = useRouter();
   const pathname = usePathname();
   const [loading, setLoading] = useState(false);
+
+  // --- 2. REUSABLE CORNER TOAST ---
+  const showToast = (icon, title) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: 'top-end',
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+    Toast.fire({ icon, title });
+  };
 
   const handleAddToCart = async () => {
     const isAuth = Cookies.get('auth'); 
@@ -22,23 +39,24 @@ const AddToCart = ({ product }) => {
         const result = await addItemToUserCart(userEmail, product);
 
         if (result.success) {
-          // --- THE FIX IS HERE ---
-          // This tells the Navbar to run its update function without a refresh
           window.dispatchEvent(new Event("cartUpdate")); 
-          // -----------------------
 
-          alert(`Added ${product.title} to cart!`);
+          // 3. SUCCESS TOAST
+          showToast('success', `${product.title} added to cart!`);
         } else {
-          alert("Database Error: " + result.error);
+          // 4. DATABASE ERROR TOAST
+          showToast('error', "Database Error: " + result.error);
         }
       } catch (err) {
-        alert("Failed to call server action.");
+        // 5. SERVER ERROR TOAST
+        showToast('error', "Failed to add item to cart");
       } finally {
         setLoading(false);
       }
       
     } else {
-      alert("Please login to save items to your cart.");
+      // 6. AUTH WARNING TOAST
+      showToast('warning', "Please login to save items to your cart.");
       router.push(`/login?redirect=${pathname}`);
     }
   };

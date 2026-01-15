@@ -3,26 +3,27 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
-    FiMail, FiPhone, FiMapPin, FiChevronDown, FiUser, 
-    FiMessageSquare, FiAlertCircle, FiCheckCircle 
+    FiMail, FiPhone, FiMapPin, FiUser, 
+    FiMessageSquare, FiAlertCircle
 } from 'react-icons/fi';
-import FAQ from '@/Components/home/FAQ';
-
-// FAQ Data remains the same
-const faqs = [
-    { question: 'What are your shipping options and times?', answer: 'We offer standard (5-7 business days) and expedited (2-3 business days) shipping. All orders are processed within 24 hours. You can find more details on our Shipping Policy page.' },
-    { question: 'How can I track my order?', answer: 'Once your order has shipped, you will receive an email with a tracking number and a link to track your package. You can also log into your AuraMart account to view your order status.' },
-    { question: 'What is your return policy?', answer: 'We accept returns within 30 days of receipt for most items in new condition. Please visit our Returns & Exchanges page for detailed instructions and to initiate a return.' },
-    { question: 'Do you offer international shipping?', answer: 'Yes, we ship to over 50 countries worldwide. International shipping costs and times vary by destination and will be calculated at checkout.' },
-];
+import Swal from 'sweetalert2'; // Added this
 
 const ContactPage = () => {
-    // --- STATE MANAGEMENT ---
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [errors, setErrors] = useState({});
-    const [showToast, setShowToast] = useState(false);
 
-    // --- FUNCTIONS ---
+    // --- REUSABLE CORNER TOAST ---
+    const showToast = (icon, title) => {
+        const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+        });
+        Toast.fire({ icon, title });
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData(prev => ({ ...prev, [name]: value }));
@@ -46,32 +47,18 @@ const ContactPage = () => {
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
-
+            // SUCCESS: Show SweetAlert in corner
+            showToast('success', 'Message Sent Successfully!');
             
-            setShowToast(true);
             setFormData({ name: '', email: '', message: '' });
-
-            setTimeout(() => setShowToast(false), 3000);
+        } else {
+            // ERROR: Show SweetAlert in corner
+            showToast('error', 'Please fix the errors below');
         }
     };
 
     return (
         <>
-            {/* --- TOAST NOTIFICATION --- */}
-            <AnimatePresence>
-                {showToast && (
-                    <motion.div
-                        initial={{ opacity: 0, y: -50 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -50 }}
-                        className="fixed top-5 right-5 z-50 flex items-center gap-3 p-4 bg-emerald-500 text-white rounded-lg shadow-xl"
-                    >
-                        <FiCheckCircle size={24} />
-                        <p className="font-bold">Message Sent Successfully!</p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
-
             <section className="bg-white dark:bg-slate-950 py-20 md:py-28">
                 <div className="container mx-auto px-6">
                     {/* --- Header --- */}
@@ -101,7 +88,7 @@ const ContactPage = () => {
                             className="space-y-8"
                         >
                             <div className="flex items-start gap-4">
-                                <FiMail className="text-2xl text-sky-500 mt-1 flex-shrink-0" />
+                                <FiMail className="text-2xl text-sky-500 mt-1 shrink-0" />
                                 <div>
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white">Email Us</h3>
                                     <p className="text-slate-600 dark:text-slate-400">Send your questions to our support team.</p>
@@ -109,7 +96,7 @@ const ContactPage = () => {
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
-                                <FiPhone className="text-2xl text-sky-500 mt-1 flex-shrink-0" />
+                                <FiPhone className="text-2xl text-sky-500 mt-1 shrink-0" />
                                 <div>
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white">Call Us</h3>
                                     <p className="text-slate-600 dark:text-slate-400">We're available from Monday to Friday.</p>
@@ -117,7 +104,7 @@ const ContactPage = () => {
                                 </div>
                             </div>
                             <div className="flex items-start gap-4">
-                                <FiMapPin className="text-2xl text-sky-500 mt-1 flex-shrink-0" />
+                                <FiMapPin className="text-2xl text-sky-500 mt-1 shrink-0" />
                                 <div>
                                     <h3 className="text-xl font-bold text-slate-900 dark:text-white">Our Headquarters</h3>
                                     <p className="text-slate-600 dark:text-slate-400">123 Aura Lane, Design District,<br/>Metropolis, 90210</p>
@@ -125,7 +112,7 @@ const ContactPage = () => {
                             </div>
                         </motion.div>
                         
-                        {/* --- CONTACT FORM (Updated with functionality) --- */}
+                        {/* --- CONTACT FORM --- */}
                         <motion.div
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -170,4 +157,3 @@ const ContactPage = () => {
 };
 
 export default ContactPage;
-

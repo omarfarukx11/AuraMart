@@ -5,7 +5,8 @@ import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
-import { getCartCount } from "@/actions/server/addToCart"; // Ensure you create this action
+import { getCartCount } from "@/actions/server/addToCart";
+import Swal from "sweetalert2"; // 1. Import SweetAlert
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -14,38 +15,64 @@ const Navbar = () => {
   const [isAuth, setIsAuth] = useState(false);
   const [cartLength, setCartLength] = useState(0);
 
- 
   const updateNavbarData = async () => {
     const auth = Cookies.get("auth");
     setIsAuth(!!auth);
 
     if (auth) {
-        const count = await getCartCount("admin@gmail.com"); 
-        setCartLength(count); 
+      const count = await getCartCount("admin@gmail.com");
+      setCartLength(count);
     } else {
-        setCartLength(0);
+      setCartLength(0);
     }
-};
+  };
 
-useEffect(() => {
+  useEffect(() => {
     updateNavbarData();
-
-    // LISTEN for the signals
     window.addEventListener("authChange", updateNavbarData);
-    window.addEventListener("cartUpdate", updateNavbarData); 
+    window.addEventListener("cartUpdate", updateNavbarData);
 
     return () => {
-        window.removeEventListener("authChange", updateNavbarData);
-        window.removeEventListener("cartUpdate", updateNavbarData);
+      window.removeEventListener("authChange", updateNavbarData);
+      window.removeEventListener("cartUpdate", updateNavbarData);
     };
-}, []);
-  const handleLogout = () => {
-    Cookies.remove("auth");
-    setIsAuth(false);
-    setCartLength(0);
-    window.dispatchEvent(new Event("authChange"));
-    router.push("/");
-    router.refresh();
+  }, []);
+
+  // --- 2. UPDATED LOGOUT WITH SWEETALERT ---
+  const handleLogout = async () => {
+    // Show confirmation dialog
+    const result = await Swal.fire({
+      title: "Are you sure?",
+      text: "You will be logged out of your account.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2563eb", // blue-600
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, logout!",
+      cancelButtonText: "Cancel",
+    });
+
+    // If user confirms
+    if (result.isConfirmed) {
+      Cookies.remove("auth");
+      setIsAuth(false);
+      setCartLength(0);
+      window.dispatchEvent(new Event("authChange"));
+      
+      // Show success toast in corner
+      Swal.fire({
+        toast: true,
+        position: "top-end",
+        icon: "success",
+        title: "Logged out successfully",
+        showConfirmButton: false,
+        timer: 2000,
+        timerProgressBar: true,
+      });
+
+      router.push("/");
+      router.refresh();
+    }
   };
 
   const handleCartClick = (e) => {
@@ -55,114 +82,134 @@ useEffect(() => {
     }
   };
 
-  if (pathname.startsWith("/dashboard")) return <></>;
+  const getNavLinkClass = (path) => {
+    const baseClass = "text-sm font-semibold transition-all duration-300 hover:text-blue-600 relative py-1";
+    const activeClass = "text-blue-600 after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-full after:h-0.5 after:bg-blue-600 after:rounded-full";
+    const inactiveClass = "text-gray-600 hover:after:w-full after:content-[''] after:absolute after:left-0 after:bottom-0 after:w-0 after:h-0.5 after:bg-blue-300 after:transition-all after:duration-300";
+    
+    return `${baseClass} ${pathname === path ? activeClass : inactiveClass}`;
+  };
 
-  const links = (
-    <>
-      <li>
-        <Link href="/" onClick={() => setIsOpen(false)}> Home </Link>
-      </li>
-      <li>
-        <Link href="/products" onClick={() => setIsOpen(false)}> Products </Link>
-      </li>
-      <li>
-        <Link href="/about" onClick={() => setIsOpen(false)}> About </Link>
-      </li>
-      <li>
-        <Link href="/contact" onClick={() => setIsOpen(false)}> Contact </Link>
-      </li>
-    </>
-  );
+  if (pathname.startsWith("/dashboard")) return null;
+
+  const navLinks = [
+    { name: "Home", path: "/" },
+    { name: "Products", path: "/products" },
+    { name: "About", path: "/about" },
+    { name: "Contact", path: "/contact" },
+  ];
 
   return (
-    <nav className="bg-white text-gray-900 shadow-md sticky top-0 z-50">
-      <div className="max-w-7xl mx-auto px-5 xl:px-20 md:px-10">
+    <nav className="bg-white text-gray-900 shadow-sm sticky top-0 z-50 border-b border-gray-100">
+      <div className="max-w-465 mx-auto px-5 xl:px-20 md:px-10">
         <div className="flex justify-between items-center h-20">
+          {/* Logo Section */}
           <div className="shrink-0">
             <Link
               href="/"
-              className="text-2xl font-black tracking-tighter text-blue-600 uppercase"
+              className="text-2xl font-black tracking-tighter text-blue-600 uppercase flex items-center gap-1"
             >
+              <span className="bg-blue-600 text-white px-2 py-0.5 rounded-md mr-1">A</span>
               AuraMart
             </Link>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-6">
+            {/* Desktop Links */}
             <div className="hidden lg:flex items-center gap-8">
-              <ul className="flex items-center gap-4 list-none">{links}</ul>
+              <ul className="flex items-center gap-8 list-none">
+                {navLinks.map((link) => (
+                  <li key={link.path}>
+                    <Link href={link.path} className={getNavLinkClass(link.path)}>
+                      {link.name}
+                    </Link>
+                  </li>
+                ))}
+              </ul>
             </div>
 
-            {/* Cart Icon with Dynamic Length */}
-            <Link
-              href="/cart"
-              onClick={handleCartClick}
-              className="relative p-2 text-gray-700 hover:text-blue-600 transition-all"
-            >
-              <FaShoppingCart size={22} />
-              {cartLength > 0 && (
-                <span className="absolute top-0 right-0 transform translate-x-1 -translate-y-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white shadow-sm animate-in zoom-in duration-300">
-                  {cartLength}
-                </span>
-              )}
-            </Link>
-
-            <div className="flex items-center border-l pl-4 border-gray-200 gap-3">
-              {isAuth ? (
-                <>
-                  <Link
-                    href="/dashboard"
-                    className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg overflow-hidden transition-all"
-                  >
-                    Dashboard
-                  </Link>
-                  <button
-                    onClick={handleLogout}
-                    className="hidden lg:block p-2 text-gray-500 hover:text-red-600 transition-colors"
-                  >
-                    <FaSignOutAlt size={20} />
-                  </button>
-                </>
-              ) : (
-                <Link
-                  href="/login"
-                  className="group relative px-4 py-2 bg-blue-600 text-white rounded-lg font-bold text-sm sm:text-lg overflow-hidden transition-all"
-                >
-                  Login
-                </Link>
-              )}
-            </div>
-
-            <div className="lg:hidden flex items-center">
-              <button
-                onClick={() => setIsOpen(!isOpen)}
-                className="p-2 text-2xl transition-transform active:scale-90 focus:outline-none"
+            <div className="flex items-center gap-2">
+              <Link
+                href="/cart"
+                onClick={handleCartClick}
+                className={`relative p-2 rounded-full transition-all ${
+                  pathname === "/cart" ? "bg-blue-50 text-blue-600" : "text-gray-600 hover:bg-gray-100"
+                }`}
               >
-                {isOpen ? <FaTimes /> : <FaBars />}
-              </button>
+                <FaShoppingCart size={22} />
+                {cartLength > 0 && (
+                  <span className="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-600 text-[10px] font-bold text-white shadow-md">
+                    {cartLength}
+                  </span>
+                )}
+              </Link>
+
+              <div className="flex items-center border-l ml-2 pl-4 border-gray-200 gap-3">
+                {isAuth ? (
+                  <>
+                    <Link
+                      href="/dashboard"
+                      className="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-bold text-sm transition-all hover:bg-blue-700 active:scale-95"
+                    >
+                      Dashboard
+                    </Link>
+                    <button
+                      onClick={handleLogout}
+                      className="hidden lg:flex p-2.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-full transition-all"
+                      title="Logout"
+                    >
+                      <FaSignOutAlt size={20} />
+                    </button>
+                  </>
+                ) : (
+                  <Link
+                    href="/login"
+                    className="px-6 py-2.5 bg-gray-900 text-white rounded-xl font-bold text-sm transition-all hover:bg-gray-800 active:scale-95"
+                  >
+                    Login
+                  </Link>
+                )}
+              </div>
+
+              {/* Mobile Menu Toggle */}
+              <div className="lg:hidden flex items-center ml-2">
+                <button
+                  onClick={() => setIsOpen(!isOpen)}
+                  className="p-2 text-2xl text-gray-600 hover:bg-gray-100 rounded-lg transition-all"
+                >
+                  {isOpen ? <FaTimes /> : <FaBars />}
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-gray-50 border-t ${
-          isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-        }`}
-      >
-        <div className="px-4 py-6 space-y-4">
-          <ul className="flex flex-col gap-4 list-none font-medium text-lg">
-            {links}
+      <div className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out bg-white ${isOpen ? "max-h-screen border-t" : "max-h-0"}`}>
+        <div className="px-6 py-8 space-y-6">
+          <ul className="flex flex-col gap-6 list-none">
+            {navLinks.map((link) => (
+              <li key={link.path}>
+                <Link
+                  href={link.path}
+                  onClick={() => setIsOpen(false)}
+                  className={`text-xl font-bold block ${pathname === link.path ? "text-blue-600" : "text-gray-800"}`}
+                >
+                  {link.name}
+                </Link>
+              </li>
+            ))}
           </ul>
 
           {isAuth && (
-            <div className="pt-4 border-t border-gray-200">
+            <div className="pt-6 border-t border-gray-100">
               <button
                 onClick={handleLogout}
-                className="flex items-center gap-3 text-red-600 font-bold text-lg w-full py-2 hover:bg-red-50 rounded-lg transition-all"
+                className="flex items-center gap-3 text-red-600 font-bold text-lg w-full py-3 rounded-lg transition-all hover:bg-red-50"
               >
                 <FaSignOutAlt />
-                Logout
+                Logout Account
               </button>
             </div>
           )}

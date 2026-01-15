@@ -4,14 +4,11 @@ import { collection, dbConnect } from "@/lib/dbConnect";
 import { revalidatePath } from "next/cache"; 
 import { ObjectId } from "mongodb"; 
 
-/**
- * 1. Add item to cart or increment quantity if it exists
- */
+
 export const addItemToUserCart = async (userEmail, product) => {
   try {
     const cartCollection = await dbConnect(collection.CARTS); 
 
-    // Convert string ID to MongoDB ObjectId
     const productId = new ObjectId(product._id);
 
     const result = await cartCollection.updateOne(
@@ -31,7 +28,6 @@ export const addItemToUserCart = async (userEmail, product) => {
       { upsert: true } 
     );
 
-    // Refresh the cart page data
     revalidatePath("/cart"); 
     return { success: true };
   } catch (error) {
@@ -40,9 +36,38 @@ export const addItemToUserCart = async (userEmail, product) => {
   }
 };
 
-/**
- * 2. Get all cart items for a specific user
- */
+export const updateCartQuantity = async (userEmail, productId, change) => {
+  try {
+    const cartCollection = await dbConnect(collection.CARTS);
+    const pId = new ObjectId(productId);
+
+    await cartCollection.updateOne(
+      { userEmail, productId: pId },
+      { $inc: { quantity: change }, $set: { updatedAt: new Date() } }
+    );
+
+    revalidatePath("/cart");
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
+// 2. Delete Item Completely
+export const deleteCartItem = async (userEmail, productId) => {
+  try {
+    const cartCollection = await dbConnect(collection.CARTS);
+    const pId = new ObjectId(productId);
+
+    await cartCollection.deleteOne({ userEmail, productId: pId });
+
+    revalidatePath("/cart");
+    return { success: true };
+  } catch (error) {
+    return { success: false, error: error.message };
+  }
+};
+
 export const getUserCart = async (userEmail) => {
     try {
         const cartCollection = await dbConnect(collection.CARTS);
@@ -56,16 +81,17 @@ export const getUserCart = async (userEmail) => {
     }
 };
 
-/**
- * 3. Get total quantity count for the Navbar badge
- */
+
 export const getCartCount = async (userEmail) => {
   try {
     const cartCollection = await dbConnect(collection.CARTS);
+
     const items = await cartCollection.find({ userEmail }).toArray();
-    return items.reduce((acc, item) => acc + (item.quantity || 0), 0);
+
+    return items.length; 
   } catch (error) {
     console.error("Count Error:", error);
     return 0;
   }
 };
+

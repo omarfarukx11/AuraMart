@@ -118,10 +118,6 @@ const RegisterFrom = () => {
                             <FaGoogle />
                             <span>Google</span>
                         </button>
-                        <button className="flex-1 flex items-center justify-center gap-2 py-3 border border-slate-200 dark:border-slate-700 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-800 transition-all">
-                            <FaFacebookF />
-                            <span>Facebook</span>
-                        </button>
                     </div>
 
                      {/* Sign In Link */}
