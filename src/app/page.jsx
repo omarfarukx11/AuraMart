@@ -17,14 +17,12 @@ export default function Home() {
   return (
     <div>
       <section className="min-h-[calc(100vh-100px)] pt-20">
-        <HeroBanner />
+        <HeroBanner /> 
         
         <div className="py-20">
-          <h1 className="text-5xl text-center pb-16 font-bold">
+          <h1 className="lg:text-5xl text-3xl text-center pb-16 font-bold">
             Our Featured Products
           </h1>
-          
-
           <Suspense fallback={<ProductGridSkeletonTwo />}>
             <Products />
           </Suspense>
@@ -32,8 +30,9 @@ export default function Home() {
 
         <OurStory />
         <ShippingPolicy />
-        <Brands />
         <Testimonials />
+        <Benefits></Benefits>
+        <Brands />
         <FAQ />
       </section>
     </div>

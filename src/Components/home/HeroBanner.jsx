@@ -20,17 +20,21 @@ const HeroBanner = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.8, ease: "easeOut" },
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }, // Custom Cubic Bezier for smoother feel
     },
   };
 
   return (
     <section className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden bg-slate-950">
+      {/* Background Image with Scale Animation */}
       <div className="absolute inset-0 z-0">
-        <img
+        <motion.img
+          initial={{ scale: 1.2, opacity: 0 }}
+          animate={{ scale: 1, opacity: 0.6 }}
+          transition={{ duration: 1.5, ease: "easeOut" }}
           src="https://i.ibb.co.com/pjndBNm2/shirt-mockup-concept-with-plain-clothing.jpg"
           alt="AuraMart Banner"
-          className="w-full h-full object-cover opacity-60 dark:opacity-40"
+          className="w-full h-full object-cover dark:opacity-40"
         />
         <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent" />
         <div className="absolute inset-0 bg-linear-to-r from-slate-950 via-transparent to-transparent" />
@@ -52,6 +56,7 @@ const HeroBanner = () => {
             New Season 2026 Arrivals
           </motion.span>
 
+          {/* Headline with Character-style spacing animation */}
           <motion.h1
             variants={itemVariants}
             className="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-8"
@@ -72,10 +77,7 @@ const HeroBanner = () => {
           </motion.p>
 
           {/* Action Buttons */}
-          <motion.div
-            variants={itemVariants}
-
-          >
+          <motion.div variants={itemVariants}>
             <Link
               href={"/products"}
               className="group relative w-64 py-3 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 active:scale-95 font-bold text-lg overflow-hidden transition-all flex justify-center items-center"
@@ -87,33 +89,41 @@ const HeroBanner = () => {
             </Link>
           </motion.div>
 
+          {/* Stats Section with delayed stagger */}
           <motion.div
             variants={itemVariants}
             className="mt-16 pt-8 border-t border-white/10 flex gap-12"
           >
-            <div>
-              <p className="text-3xl font-bold text-white">50k+</p>
-              <p className="text-slate-500 text-sm uppercase tracking-widest">
-                Global Clients
-              </p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold text-white">24/7</p>
-              <p className="text-slate-500 text-sm uppercase tracking-widest">
-                Support Line
-              </p>
-            </div>
-            <div>
-              <p className="text-3xl font-bold text-white">100%</p>
-              <p className="text-slate-500 text-sm uppercase tracking-widest">
-                Organic Quality
-              </p>
-            </div>
+            {[
+              { label: "Global Clients", val: "50k+" },
+              { label: "Support Line", val: "24/7" },
+              { label: "Organic Quality", val: "100%" },
+            ].map((stat, idx) => (
+              <motion.div 
+                key={idx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1 + idx * 0.1 }}
+              >
+                <p className="text-3xl font-bold text-white">{stat.val}</p>
+                <p className="text-slate-500 text-sm uppercase tracking-widest">
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
           </motion.div>
         </motion.div>
       </div>
 
-      <div className="absolute right-[-10%] bottom-[-10%] w-150 h-150 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
+      {/* Decorative Blur with Pulse */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1],
+          opacity: [0.2, 0.3, 0.2] 
+        }}
+        transition={{ duration: 8, repeat: Infinity }}
+        className="absolute right-[-10%] bottom-[-10%] w-150 h-150 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" 
+      />
     </section>
   );
 };

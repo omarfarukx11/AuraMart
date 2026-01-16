@@ -1,5 +1,9 @@
 import AllProductsClient from '@/Components/products/AllProductsClient';
 import React from 'react';
+export const metadata = {
+  title: "All Product",
+  
+};
 
 const AllProducts = () => {
     return (

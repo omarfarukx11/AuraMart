@@ -1,12 +1,11 @@
 import Image from 'next/image';
 import AddToCart from '../AddToCard/AddToCard';
+import NotFound from '@/app/not-found';
 
 const ProductDetails = async ({ product }) => {
   if (!product || !product.title) {
     return (
-      <div className="min-h-[60vh] flex items-center justify-center">
-        <h2 className="text-xl font-semibold">Product not found</h2>
-      </div>
+      <NotFound></NotFound>
     );
   }
 
