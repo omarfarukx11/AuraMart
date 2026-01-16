@@ -6,7 +6,6 @@ import { FaArrowRight } from "react-icons/fa";
 import Link from "next/link";
 
 const HeroBanner = () => {
-  // Animation Variants
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -20,13 +19,13 @@ const HeroBanner = () => {
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] }, // Custom Cubic Bezier for smoother feel
+      transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
     },
   };
 
   return (
-    <section className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden bg-slate-950">
-      {/* Background Image with Scale Animation */}
+    <section className="relative w-full min-h-screen flex items-center justify-center overflow-hidden bg-slate-950 ">
+
       <div className="absolute inset-0 z-0">
         <motion.img
           initial={{ scale: 1.2, opacity: 0 }}
@@ -48,7 +47,7 @@ const HeroBanner = () => {
           animate="visible"
           className="max-w-4xl"
         >
-          {/* Badge */}
+
           <motion.span
             variants={itemVariants}
             className="inline-block px-4 py-2 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 font-bold text-sm uppercase tracking-widest mb-6"
@@ -56,7 +55,7 @@ const HeroBanner = () => {
             New Season 2026 Arrivals
           </motion.span>
 
-          {/* Headline with Character-style spacing animation */}
+
           <motion.h1
             variants={itemVariants}
             className="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-8"

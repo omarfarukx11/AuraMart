@@ -1,16 +1,14 @@
-import AllProductsClient from '@/Components/products/AllProductsClient';
-import React from 'react';
-export const metadata = {
-  title: "All Product",
-  
-};
+import React, { Suspense } from 'react';
+import Products from '../products/Products';
+import { ProductGridSkeletonTwo } from '../skelenton/productGridSkelentonTwo';
 
-const AllProducts = () => {
+const TopProduct = () => {
     return (
-        <div className='min-h-[clac(100vh-120px)] lg:my-30 my-10'>
-           <div className="text-center mb-16 space-y-4">
+        <div className="py-20 px-5">
+          <div >
+            <div className="text-center mb-16 space-y-4">
               <h1 className="lg:text-6xl text-4xl font-black tracking-tighter text-slate-900 uppercase">
-                All Products
+                Our Featured Products
               </h1>
 
               <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
@@ -21,9 +19,12 @@ const AllProducts = () => {
               </p>
               <div className="w-20 h-1 bg-blue-600 mx-auto mt-6 rounded-full"></div>
             </div>
-            <AllProductsClient></AllProductsClient>
+            <Suspense fallback={<ProductGridSkeletonTwo />}>
+              <Products />
+            </Suspense>
+          </div>
         </div>
     );
 };
 
-export default AllProducts;
+export default TopProduct;

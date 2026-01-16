@@ -80,9 +80,8 @@ export default function RootLayout({ children }) {
       <body
       className={`${poppins.className}`}
       >
-        <header className="fixed w-full top-0 z-50 ">
           <Navbar />
-        </header>
+
         <main className="min-h-screen">
           {children}
         </main>

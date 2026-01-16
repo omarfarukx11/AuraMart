@@ -22,38 +22,41 @@ const ShippingPolicy = () => {
     };
 
     return (
-        <section className="py-24 bg-white dark:bg-slate-950">
-            <div className="container mx-auto px-5 md:px-10 xl:px-20 max-w-465">
+        <section className="py-16 md:py-24 bg-white dark:bg-slate-950 overflow-x-hidden">
+            {/* FIX: Replaced max-w-465 with max-w-[1400px]. 
+                Added w-full and px-4 for mobile safety. 
+            */}
+            <div className="container mx-auto px-4 md:px-10 xl:px-20 max-w-[1400px] w-full">
                 
                 {/* Header Section */}
-                <div className="text-center mb-24">
+                <div className="text-center mb-16 md:mb-24">
                     <motion.div
                         initial={{ opacity: 0, scale: 0.9 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
                     >
-                        <h2 className="text-5xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8">
+                        <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-slate-900 dark:text-white tracking-tighter uppercase mb-8">
                             Shipping <span className="text-blue-600">&</span> Delivery
                         </h2>
                         <motion.p 
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             transition={{ delay: 0.4 }}
-                            className="text-xl md:text-2xl text-slate-500 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium"
+                            className="text-lg md:text-2xl text-slate-500 dark:text-slate-400 max-w-3xl mx-auto leading-relaxed font-medium"
                         >
                             We strive to get your AuraMart essentials to your doorstep as quickly and safely as possible. Transparent tracking and global reach.
                         </motion.p>
                     </motion.div>
                 </div>
 
-                {/* Quick Info Cards with Staggered Entrance */}
+                {/* Quick Info Cards - Changed to grid-cols-1 for mobile */}
                 <motion.div 
                     variants={cardContainer}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: true }}
-                    className="grid md:grid-cols-3 gap-8 mb-32"
+                    className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 mb-20 md:mb-32"
                 >
                     <QuickCard 
                         variants={itemFadeUp}
@@ -76,26 +79,27 @@ const ShippingPolicy = () => {
                 </motion.div>
 
                 {/* Detailed Policy Grid */}
-                <div className="grid lg:grid-cols-2 gap-16 xl:gap-32 items-start border-t border-slate-100 dark:border-slate-800 pt-24">
+                <div className="grid lg:grid-cols-2 gap-12 md:gap-16 xl:gap-32 items-start border-t border-slate-100 dark:border-slate-800 pt-16 md:pt-24">
                     
-                    {/* Shipping Rates Table with Row Hover Animation */}
+                    {/* Shipping Rates Table */}
                     <motion.div 
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="space-y-10"
+                        className="space-y-8 md:space-y-10 w-full"
                     >
-                        <h3 className="text-4xl font-black text-slate-900 dark:text-white flex items-center gap-4 tracking-tighter uppercase">
+                        <h3 className="text-3xl md:text-4xl font-black text-slate-900 dark:text-white flex items-center gap-4 tracking-tighter uppercase">
                             <FaBoxOpen className="text-blue-600" /> Shipping Rates
                         </h3>
-                        <div className="overflow-hidden rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30">
-                            <table className="w-full text-left border-collapse">
+                        {/* FIX: Added overflow-x-auto so table scrolls horizontally instead of breaking width */}
+                        <div className="overflow-x-auto rounded-2xl border border-slate-100 dark:border-slate-800 bg-slate-50/50 dark:bg-slate-900/30">
+                            <table className="w-full text-left border-collapse min-w-[450px]">
                                 <thead>
                                     <tr className="bg-slate-100/50 dark:bg-slate-900/80">
-                                        <th className="p-6 font-black text-xs uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-800">Method</th>
-                                        <th className="p-6 font-black text-xs uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-800">Criteria</th>
-                                        <th className="p-6 font-black text-xs uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-800">Cost</th>
+                                        <th className="p-4 md:p-6 font-black text-[10px] md:text-xs uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-800">Method</th>
+                                        <th className="p-4 md:p-6 font-black text-[10px] md:text-xs uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-800">Criteria</th>
+                                        <th className="p-4 md:p-6 font-black text-[10px] md:text-xs uppercase tracking-widest text-slate-400 border-b border-slate-200 dark:border-slate-800">Cost</th>
                                     </tr>
                                 </thead>
                                 <tbody className="text-slate-600 dark:text-slate-400">
@@ -107,13 +111,13 @@ const ShippingPolicy = () => {
                         </div>
                     </motion.div>
 
-                    {/* FAQ-style Details with Staggered Checkmarks */}
+                    {/* FAQ-style Details */}
                     <motion.div 
                         initial={{ opacity: 0, x: 50 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8 }}
                         viewport={{ once: true }}
-                        className="space-y-16"
+                        className="space-y-12 md:space-y-16"
                     >
                         <PolicyItem 
                             title="Tracking Your Aura" 
@@ -134,20 +138,21 @@ const ShippingPolicy = () => {
     );
 };
 
+// Sub-components
 const QuickCard = ({ icon, title, desc, variants }) => (
     <motion.div 
         variants={variants}
         whileHover={{ y: -12, backgroundColor: 'rgba(59, 130, 246, 0.02)' }}
-        className="p-12 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 transition-all shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 text-center group"
+        className="p-8 md:p-12 bg-white dark:bg-slate-900 rounded-3xl border border-slate-100 dark:border-slate-800 transition-all shadow-sm hover:shadow-2xl hover:shadow-blue-500/10 text-center group"
     >
         <motion.div 
             whileHover={{ scale: 1.2, rotate: 5 }}
-            className="text-5xl flex justify-center mb-8"
+            className="text-4xl md:text-5xl flex justify-center mb-6 md:mb-8"
         >
             {icon}
         </motion.div>
-        <h4 className="text-2xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter uppercase">{title}</h4>
-        <p className="text-slate-500 dark:text-slate-400 leading-relaxed font-medium">{desc}</p>
+        <h4 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter uppercase">{title}</h4>
+        <p className="text-sm md:text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-medium">{desc}</p>
     </motion.div>
 );
 
@@ -156,9 +161,9 @@ const TableRow = ({ method, criteria, cost, isFree, isLast }) => (
         whileHover={{ backgroundColor: 'rgba(59, 130, 246, 0.03)' }}
         className={`${!isLast ? 'border-b border-slate-100 dark:border-slate-800' : ''} transition-colors group`}
     >
-        <td className="p-6 font-bold text-slate-900 dark:text-slate-200">{method}</td>
-        <td className="p-6 text-sm font-medium">{criteria}</td>
-        <td className={`p-6 font-black ${isFree ? 'text-emerald-500' : 'text-slate-900 dark:text-white'}`}>{cost}</td>
+        <td className="p-4 md:p-6 font-bold text-sm md:text-base text-slate-900 dark:text-slate-200">{method}</td>
+        <td className="p-4 md:p-6 text-xs md:text-sm font-medium">{criteria}</td>
+        <td className={`p-4 md:p-6 font-black text-sm md:text-base ${isFree ? 'text-emerald-500' : 'text-slate-900 dark:text-white'}`}>{cost}</td>
     </motion.tr>
 );
 
@@ -167,22 +172,22 @@ const PolicyItem = ({ title, text }) => (
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        className="flex gap-8 group"
+        className="flex gap-4 md:gap-8 group"
     >
-        <div className="mt-1">
+        <div className="mt-1 flex-shrink-0">
             <motion.div 
                 whileInView={{ scale: [0, 1.2, 1] }}
                 transition={{ duration: 0.5 }}
-                className="w-8 h-8 rounded-full bg-blue-600/10 flex items-center justify-center"
+                className="w-6 h-6 md:w-8 md:h-8 rounded-full bg-blue-600/10 flex items-center justify-center"
             >
-                <FaCheckCircle className="text-blue-600 text-xl" />
+                <FaCheckCircle className="text-blue-600 text-lg md:text-xl" />
             </motion.div>
         </div>
         <div>
-            <h4 className="text-2xl font-black text-slate-900 dark:text-white mb-4 tracking-tighter uppercase group-hover:text-blue-600 transition-colors">
+            <h4 className="text-xl md:text-2xl font-black text-slate-900 dark:text-white mb-3 md:mb-4 tracking-tighter uppercase group-hover:text-blue-600 transition-colors">
                 {title}
             </h4>
-            <p className="text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-medium">{text}</p>
+            <p className="text-base md:text-lg text-slate-500 dark:text-slate-400 leading-relaxed font-medium">{text}</p>
         </div>
     </motion.div>
 );
