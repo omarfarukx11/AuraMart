@@ -55,11 +55,7 @@
 
 1. **Clone the project:**
    ```bash
-   git clone [https://github.com/your-username/auramart.git](https://github.com/your-username/auramart.git)
+   git clone (https://github.com/omarfarukx11/AuraMart.git)
    cd auramart
 2 . **Install dependencies:**
     npm install 
-
-3. Configure Environment Variables: Create a .env.local file in the root and add
-   MONODO_DB_URI =mongodb+srv://aura-mart:94VUI4KQ5SHgz9Iq@cluster0.oyyjehq.mongodb.net/?appName=Cluster0;
-   DB_NAME = aura-mart
