@@ -97,7 +97,7 @@ const AddNewItem = () => {
                 <button 
                     type="submit"
                     disabled={loading}
-                    className="w-full py-4 bg-gray-900 text-white rounded-xl font-bold text-lg hover:bg-black transition-all disabled:opacity-50"
+                    className="w-full py-4 bg-blue-600 text-white  rounded-xl font-bold text-lg hover:bg-white hover:text-black hover:border hover:border-gray-300 transition-all disabled:opacity-50"
                 >
                     {loading ? "Publishing Product..." : "Publish Product to Store"}
                 </button>

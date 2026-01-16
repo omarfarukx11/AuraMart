@@ -19,7 +19,7 @@ const Footer = () => {
     if(pathname.startsWith('/login')) return <></>
 
     return (
-        <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 pt-20 pb-10">
+        <footer className="bg-gray-300 border-t border-slate-200 dark:border-slate-800 pt-20 pb-10">
             {/* Updated to match your 1860px design requirement */}
             <div className="container mx-auto px-5 lg:px-10 xl:px-20 max-w-465">
                 

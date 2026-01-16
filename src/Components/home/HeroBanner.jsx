@@ -1,109 +1,121 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { FaArrowRight } from 'react-icons/fa';
-import Link from 'next/link';
+import React from "react";
+import { motion } from "framer-motion";
+import { FaArrowRight } from "react-icons/fa";
+import Link from "next/link";
 
 const HeroBanner = () => {
-    // Animation Variants
-    const containerVariants = {
-        hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.2, delayChildren: 0.3 }
-        }
-    };
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.2, delayChildren: 0.3 },
+    },
+  };
 
-    const itemVariants = {
-        hidden: { y: 30, opacity: 0 },
-        visible: { y: 0, opacity: 1, transition: { duration: 0.8, ease: "easeOut" } }
-    };
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: { duration: 0.8, ease: "easeOut" },
+    },
+  };
 
-    return (
-        <section className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden bg-slate-950">
-            <div className="absolute inset-0 z-0">
-                <img 
-                    src="https://i.ibb.co.com/pjndBNm2/shirt-mockup-concept-with-plain-clothing.jpg" 
-                    alt="AuraMart Banner" 
-                    className="w-full h-full object-cover opacity-60 dark:opacity-40"
-                />
-                <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent" />
-                <div className="absolute inset-0 bg-linear-to-r from-slate-950 via-transparent to-transparent" />
+  return (
+    <section className="relative w-full h-[90vh] flex items-center justify-center overflow-hidden bg-slate-950">
+      <div className="absolute inset-0 z-0">
+        <img
+          src="https://i.ibb.co.com/pjndBNm2/shirt-mockup-concept-with-plain-clothing.jpg"
+          alt="AuraMart Banner"
+          className="w-full h-full object-cover opacity-60 dark:opacity-40"
+        />
+        <div className="absolute inset-0 bg-linear-to-t from-slate-950 via-slate-950/20 to-transparent" />
+        <div className="absolute inset-0 bg-linear-to-r from-slate-950 via-transparent to-transparent" />
+      </div>
+
+      {/* Main Content Container */}
+      <div className="container mx-auto xl:px-20 md:px-10 px-5 max-w-465 relative z-10">
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          className="max-w-4xl"
+        >
+          {/* Badge */}
+          <motion.span
+            variants={itemVariants}
+            className="inline-block px-4 py-2 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 font-bold text-sm uppercase tracking-widest mb-6"
+          >
+            New Season 2026 Arrivals
+          </motion.span>
+
+          <motion.h1
+            variants={itemVariants}
+            className="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-8"
+          >
+            EXPERIENCE <br />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-400">
+              AURA.
+            </span>
+          </motion.h1>
+
+          {/* Subtext */}
+          <motion.p
+            variants={itemVariants}
+            className="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl leading-relaxed"
+          >
+            Discover curated collections that elevate your lifestyle, from
+            premium skincare to modern home essentials. Designed for the future.
+          </motion.p>
+
+          {/* Action Buttons */}
+          <motion.div
+            variants={itemVariants}
+
+          >
+            <Link
+              href={"/products"}
+              className="group relative w-64 py-3 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 active:scale-95 font-bold text-lg overflow-hidden transition-all flex justify-center items-center"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Explore Collection
+                <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
+              </span>
+            </Link>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="mt-16 pt-8 border-t border-white/10 flex gap-12"
+          >
+            <div>
+              <p className="text-3xl font-bold text-white">50k+</p>
+              <p className="text-slate-500 text-sm uppercase tracking-widest">
+                Global Clients
+              </p>
             </div>
-
-            {/* Main Content Container */}
-            <div className="container mx-auto xl:px-20 md:px-10 px-5 max-w-465 relative z-10">
-                <motion.div 
-                    variants={containerVariants}
-                    initial="hidden"
-                    animate="visible"
-                    className="max-w-4xl"
-                >
-                    {/* Badge */}
-                    <motion.span 
-                        variants={itemVariants}
-                        className="inline-block px-4 py-2 rounded-full bg-blue-600/20 border border-blue-500/30 text-blue-400 font-bold text-sm uppercase tracking-widest mb-6"
-                    >
-                        New Season 2026 Arrivals
-                    </motion.span>
-
-
-                    <motion.h1 
-                        variants={itemVariants}
-                        className="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-8"
-                    >
-                        EXPERIENCE <br />
-                        <span className="text-transparent bg-clip-text bg-linear-to-r from-blue-500 to-cyan-400">
-                            AURA.
-                        </span>
-                    </motion.h1>
-
-                    {/* Subtext */}
-                    <motion.p 
-                        variants={itemVariants}
-                        className="text-xl md:text-2xl text-slate-300 mb-10 max-w-2xl leading-relaxed"
-                    >
-                        Discover curated collections that elevate your lifestyle, from 
-                        premium skincare to modern home essentials. Designed for the future.
-                    </motion.p>
-
-                    {/* Action Buttons */}
-                    <motion.div 
-                        variants={itemVariants}
-                        className="flex flex-col sm:flex-row gap-5"
-                    >
-                        <Link href={'/products'} className="group relative px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 active:scale-95 font-bold text-lg overflow-hidden transition-all ">
-                            <span className="relative z-10 flex items-center gap-2">
-                                Explore Collection <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
-                            </span>
-                        </Link>
-                    </motion.div>
-
-                    <motion.div 
-                        variants={itemVariants}
-                        className="mt-16 pt-8 border-t border-white/10 flex gap-12"
-                    >
-                        <div>
-                            <p className="text-3xl font-bold text-white">50k+</p>
-                            <p className="text-slate-500 text-sm uppercase tracking-widest">Global Clients</p>
-                        </div>
-                        <div>
-                            <p className="text-3xl font-bold text-white">24/7</p>
-                            <p className="text-slate-500 text-sm uppercase tracking-widest">Support Line</p>
-                        </div>
-                        <div>
-                            <p className="text-3xl font-bold text-white">100%</p>
-                            <p className="text-slate-500 text-sm uppercase tracking-widest">Organic Quality</p>
-                        </div>
-                    </motion.div>
-                </motion.div>
+            <div>
+              <p className="text-3xl font-bold text-white">24/7</p>
+              <p className="text-slate-500 text-sm uppercase tracking-widest">
+                Support Line
+              </p>
             </div>
+            <div>
+              <p className="text-3xl font-bold text-white">100%</p>
+              <p className="text-slate-500 text-sm uppercase tracking-widest">
+                Organic Quality
+              </p>
+            </div>
+          </motion.div>
+        </motion.div>
+      </div>
 
-
-            <div className="absolute right-[-10%] bottom-[-10%] w-150 h-150 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
-        </section>
-    );
+      <div className="absolute right-[-10%] bottom-[-10%] w-150 h-150 bg-blue-600/20 rounded-full blur-[120px] pointer-events-none" />
+    </section>
+  );
 };
 
 export default HeroBanner;
