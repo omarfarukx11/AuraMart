@@ -55,7 +55,7 @@
 
 1. **Clone the project:**
    ```bash
-   git clone [(https://github.com/omarfarukx11/AuraMart.git)](https://github.com/omarfarukx11/AuraMart.git)
+   git clone https://github.com/omarfarukx11/AuraMart.git
    cd auramart
 2 . **Install dependencies:**
     npm install 
