@@ -56,7 +56,7 @@ const FAQ = () => {
                         <p className="text-slate-600 dark:text-slate-400 text-lg mb-8">
                             Can't find what you're looking for? Reach out to our 24/7 support team for personalized assistance.
                         </p>
-                        <Link href={'/contact'} className="group relative px-8 py-5 bg-blue-600 text-white rounded-xl font-bold text-lg overflow-hidden transition-all hover:bg-green-400 ">
+                        <Link href={'/contact'} className="group relative px-6 py-4 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 active:scale-95 font-bold text-lg overflow-hidden transition-all">
                             Contact Support
                         </Link>
                     </div>

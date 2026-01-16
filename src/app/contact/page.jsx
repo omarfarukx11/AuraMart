@@ -144,7 +144,7 @@ const ContactPage = () => {
                                     </div>
                                     {errors.message && <p className="mt-1 text-sm text-rose-500 flex items-center gap-1"><FiAlertCircle /> {errors.message}</p>}
                                 </div>
-                                <button type="submit" className="w-full bg-slate-900 dark:bg-sky-600 text-white font-bold py-3 rounded-lg hover:bg-slate-800 dark:hover:bg-sky-500 transition-all duration-300 shadow-md hover:shadow-lg">
+                                <button type="submit" className="w-full bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 active:scale-95 font-bold py-3 dark:hover:bg-sky-500 transition-all duration-300 shadow-md hover:shadow-lg">
                                     Send Message
                                 </button>
                             </form>

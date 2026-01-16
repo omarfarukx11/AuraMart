@@ -1,3 +1,4 @@
+import { Suspense } from "react"; // 1. Import Suspense
 import Navbar from "@/Components/Header/Navbar";
 import Benefits from "@/Components/home/Benefits";
 import Brands from "@/Components/home/Brands";
@@ -8,23 +9,33 @@ import OurStory from "@/Components/home/OurStory";
 import ShippingPolicy from "@/Components/home/ShippingPolicy";
 import Testimonials from "@/Components/home/Testimonials";
 import Products from "@/Components/products/Products";
+import { ProductGridSkeletonTwo } from "@/Components/skelenton/productGridSkelentonTwo";
+
 
 
 export default function Home() {
   return (
-    <div >
-     <section className="min-h-[calc(100vh-100px)] pt-20">
-      <HeroBanner></HeroBanner>
-      <div>
-        <h1 className="text-5xl text-center py-30 font-bold ">Our Feauter Product</h1>
-        <Products></Products>
-      </div>
-      <OurStory></OurStory>
-      <ShippingPolicy></ShippingPolicy>
-      <Brands></Brands>
-      <Testimonials></Testimonials>
-      <FAQ></FAQ>
-     </section>
+    <div>
+      <section className="min-h-[calc(100vh-100px)] pt-20">
+        <HeroBanner />
+        
+        <div className="py-20">
+          <h1 className="text-5xl text-center pb-16 font-bold">
+            Our Featured Products
+          </h1>
+          
+
+          <Suspense fallback={<ProductGridSkeletonTwo />}>
+            <Products />
+          </Suspense>
+        </div>
+
+        <OurStory />
+        <ShippingPolicy />
+        <Brands />
+        <Testimonials />
+        <FAQ />
+      </section>
     </div>
   );
 }

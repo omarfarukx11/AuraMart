@@ -16,6 +16,7 @@ const Footer = () => {
     const currentYear = new Date().getFullYear();
       const pathname = usePathname();
     if(pathname.startsWith('/dashboard')) return <></>
+    if(pathname.startsWith('/login')) return <></>
 
     return (
         <footer className="bg-white dark:bg-slate-950 border-t border-slate-200 dark:border-slate-800 pt-20 pb-10">
@@ -42,15 +43,15 @@ const Footer = () => {
                     <div className="lg:col-span-8 grid grid-cols-2 md:grid-cols-4 gap-8">
                         <FooterColumn 
                             title="Shop" 
-                            links={["New Arrivals", "Best Sellers", "Special Offers", "Eco-Friendly"]} 
+                            links={["New Arrivals", "Best Sellers", "Special Offers"]} 
                         />
                         <FooterColumn 
                             title="Support" 
-                            links={["Shipping Policy", "Return & Exchange", "Order Tracking", "FAQ"]} 
+                            links={["Shipping Policy", "Return & Exchange", "FAQ"]} 
                         />
                         <FooterColumn 
                             title="Company" 
-                            links={["Our Story", "Careers", "Press Release", "Sustainability"]} 
+                            links={["Our Story", "Careers","Sustainability"]} 
                         />
                         <div className="space-y-6">
                             <h4 className="font-bold text-slate-900 dark:text-white text-lg border-b border-slate-100 dark:border-slate-800 pb-2">
@@ -58,15 +59,15 @@ const Footer = () => {
                             </h4>
                             <ul className="space-y-4">
                                 <li className="flex items-center gap-3 text-slate-600 dark:text-slate-400">
-                                    <IoLocationOutline size={20} className="text-blue-600 flex-shrink-0" />
+                                    <IoLocationOutline size={20} className="text-blue-600 shrink-0" />
                                     <span>123 Fashion Ave, NY 10001</span>
                                 </li>
                                 <li className="flex items-center gap-3 text-slate-600 dark:text-slate-400">
-                                    <FaPhoneAlt size={16} className="text-blue-600 flex-shrink-0" />
+                                    <FaPhoneAlt size={16} className="text-blue-600 shrink-0" />
                                     <span>+1 (555) 000-1234</span>
                                 </li>
                                 <li className="flex items-center gap-3 text-slate-600 dark:text-slate-400">
-                                    <FaRegEnvelope size={18} className="text-blue-600 flex-shrink-0" />
+                                    <FaRegEnvelope size={18} className="text-blue-600 shrink-0" />
                                     <span>hello@auramart.com</span>
                                 </li>
                             </ul>
@@ -78,19 +79,6 @@ const Footer = () => {
 
                 {/* Newsletter & Bottom Bar */}
                 <div className="flex flex-col xl:flex-row justify-between items-center gap-8">
-                    <div className="w-full xl:w-1/3">
-                        <h4 className="font-bold text-slate-900 dark:text-white mb-4">Subscribe to our newsletter</h4>
-                        <div className="flex gap-2">
-                            <input 
-                                type="email" 
-                                placeholder="Enter your email" 
-                                className="flex-1 px-4 py-3 rounded-xl bg-slate-100 dark:bg-slate-900 border-none focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white"
-                            />
-                            <button className="bg-slate-900 dark:bg-blue-600 dark:text-white text-white px-6 py-3 rounded-xl font-bold hover:bg-blue-600 transition-all">
-                                Join
-                            </button>
-                        </div>
-                    </div>
 
                     <div className="flex flex-col md:flex-row items-center gap-8 text-center md:text-left">
                         <div className="flex gap-6 text-sm font-medium text-slate-500 dark:text-slate-400">

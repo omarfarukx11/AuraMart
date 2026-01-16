@@ -48,7 +48,7 @@ const HeroBanner = () => {
                         New Season 2026 Arrivals
                     </motion.span>
 
-                    {/* Main Heading */}
+
                     <motion.h1 
                         variants={itemVariants}
                         className="text-6xl md:text-8xl lg:text-9xl font-black text-white leading-[0.9] tracking-tighter mb-8"
@@ -73,7 +73,7 @@ const HeroBanner = () => {
                         variants={itemVariants}
                         className="flex flex-col sm:flex-row gap-5"
                     >
-                        <Link href={'/products'} className="group relative px-8 py-5 bg-blue-600 text-white rounded-xl font-bold text-lg overflow-hidden transition-all hover:pr-12">
+                        <Link href={'/products'} className="group relative px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 active:scale-95 font-bold text-lg overflow-hidden transition-all ">
                             <span className="relative z-10 flex items-center gap-2">
                                 Explore Collection <FaArrowRight className="group-hover:translate-x-1 transition-transform" />
                             </span>

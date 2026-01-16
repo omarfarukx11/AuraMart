@@ -6,7 +6,7 @@ import { usePathname, useRouter } from "next/navigation";
 import React, { useState, useEffect } from "react";
 import { FaBars, FaTimes, FaShoppingCart, FaSignOutAlt } from "react-icons/fa";
 import { getCartCount } from "@/actions/server/addToCart";
-import Swal from "sweetalert2"; // 1. Import SweetAlert
+import Swal from "sweetalert2"; 
 
 const Navbar = () => {
   const pathname = usePathname();
@@ -38,7 +38,7 @@ const Navbar = () => {
     };
   }, []);
 
-  // --- 2. UPDATED LOGOUT WITH SWEETALERT ---
+ 
   const handleLogout = async () => {
     // Show confirmation dialog
     const result = await Swal.fire({
@@ -46,20 +46,20 @@ const Navbar = () => {
       text: "You will be logged out of your account.",
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#2563eb", // blue-600
+      confirmButtonColor: "#2563eb",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, logout!",
       cancelButtonText: "Cancel",
     });
 
-    // If user confirms
+
     if (result.isConfirmed) {
       Cookies.remove("auth");
       setIsAuth(false);
       setCartLength(0);
       window.dispatchEvent(new Event("authChange"));
       
-      // Show success toast in corner
+
       Swal.fire({
         toast: true,
         position: "top-end",
@@ -91,6 +91,7 @@ const Navbar = () => {
   };
 
   if (pathname.startsWith("/dashboard")) return null;
+  if (pathname.startsWith("/login")) return null;
 
   const navLinks = [
     { name: "Home", path: "/" },
@@ -107,10 +108,10 @@ const Navbar = () => {
           <div className="shrink-0">
             <Link
               href="/"
-              className="text-2xl font-black tracking-tighter text-blue-600 uppercase flex items-center gap-1"
+              className="text-3xl font-black tracking-tighter text-slate-900 dark:text-white uppercase"
             >
-              <span className="bg-blue-600 text-white px-2 py-0.5 rounded-md mr-1">A</span>
-              AuraMart
+                AuraMart<span className="text-blue-600">.</span>
+
             </Link>
           </div>
 
@@ -149,7 +150,7 @@ const Navbar = () => {
                   <>
                     <Link
                       href="/dashboard"
-                      className="px-5 py-2.5 bg-blue-600 text-white rounded-xl font-bold text-sm transition-all hover:bg-blue-700 active:scale-95"
+                      className="px-5 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 active:scale-95 font-bold text-sm transition-all "
                     >
                       Dashboard
                     </Link>
@@ -164,7 +165,7 @@ const Navbar = () => {
                 ) : (
                   <Link
                     href="/login"
-                    className="px-6 py-2.5 bg-gray-900 text-white rounded-xl font-bold text-sm transition-all hover:bg-gray-800 active:scale-95"
+                    className="px-6 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 font-bold text-sm transition-all active:scale-95"
                   >
                     Login
                   </Link>

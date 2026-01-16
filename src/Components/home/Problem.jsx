@@ -60,7 +60,7 @@ export default function ProblemSolution() {
             <ul className="space-y-4">
               {solutions.map((text, i) => (
                 <li key={i} className="flex items-start gap-3 text-slate-700 dark:text-slate-300">
-                  <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-1 flex-shrink-0" />
+                  <CheckCircle2 className="w-5 h-5 text-emerald-500 mt-1 shrink-0" />
                   <span>{text}</span>
                 </li>
               ))}

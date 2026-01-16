@@ -66,7 +66,7 @@ const AddToCart = ({ product }) => {
       onClick={handleAddToCart}
       disabled={loading}
       className={`flex-1 ${
-        loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-blue-700'
+        loading ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 hover:bg-white hover:border hover:border-gray-300 hover:text-black'
       } text-white py-3 rounded-xl font-semibold transition-all active:scale-95`}
     >
       {loading ? (
