@@ -36,12 +36,6 @@ const DashboardLayout = ({ children }) => {
           <FaPlus /> Add New Item
         </Link>
       </nav>
-
-      <div className="p-4 border-t border-gray-100">
-        <button className="w-full flex items-center gap-3 px-4 py-3 text-red-500 hover:bg-red-50 rounded-xl transition-all font-bold">
-          <FaSignOutAlt /> Logout
-        </button>
-      </div>
     </>
   );
 
@@ -57,13 +51,13 @@ const DashboardLayout = ({ children }) => {
       {/* Overlay - Flat dark tint */}
       {isSidebarOpen && (
         <div 
-          className="fixed inset-0 bg-slate-900/40 z-[60] md:hidden" 
+          className="fixed inset-0 bg-slate-900/40 z-60 md:hidden" 
           onClick={toggleSidebar}
         />
       )}
       
       {/* Slider Menu - Border used instead of shadow */}
-      <div className={`fixed inset-y-0 left-0 w-72 bg-white z-[70] border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
+      <div className={`fixed inset-y-0 left-0 w-72 bg-white z-70 border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <button 
           onClick={toggleSidebar}
           className="absolute top-5 right-5 p-2 text-gray-500 hover:bg-gray-100 rounded-full"
@@ -88,7 +82,6 @@ const DashboardLayout = ({ children }) => {
             <span className="hidden sm:inline text-sm font-bold text-gray-400 uppercase tracking-widest">
               Admin Panel
             </span>
-            {/* Avatar - Border only, no shadow */}
             <div className="w-10 h-10 bg-blue-600 rounded-full border border-blue-700 flex items-center justify-center text-white font-bold">
               A
             </div>

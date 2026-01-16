@@ -23,10 +23,7 @@ const ShippingPolicy = () => {
 
     return (
         <section className="py-16 md:py-24 bg-white dark:bg-slate-950 overflow-x-hidden">
-            {/* FIX: Replaced max-w-465 with max-w-[1400px]. 
-                Added w-full and px-4 for mobile safety. 
-            */}
-            <div className="container mx-auto px-4 md:px-10 xl:px-20 max-w-[1400px] w-full">
+            <div className="container mx-auto px-4 md:px-10 xl:px-20 max-w-465 w-full">
                 
                 {/* Header Section */}
                 <div className="text-center mb-16 md:mb-24">
@@ -174,7 +171,7 @@ const PolicyItem = ({ title, text }) => (
         viewport={{ once: true }}
         className="flex gap-4 md:gap-8 group"
     >
-        <div className="mt-1 flex-shrink-0">
+        <div className="mt-1 shrink-0">
             <motion.div 
                 whileInView={{ scale: [0, 1.2, 1] }}
                 transition={{ duration: 0.5 }}

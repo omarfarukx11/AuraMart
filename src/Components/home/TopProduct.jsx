@@ -4,7 +4,7 @@ import { ProductGridSkeletonTwo } from '../skelenton/productGridSkelentonTwo';
 
 const TopProduct = () => {
     return (
-        <div className="py-20 px-5">
+        <div className="py-20 ">
           <div >
             <div className="text-center mb-16 space-y-4">
               <h1 className="lg:text-6xl text-4xl font-black tracking-tighter text-slate-900 uppercase">

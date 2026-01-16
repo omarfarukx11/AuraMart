@@ -7,8 +7,8 @@ export const metadata = {
 
 const AllProducts = () => {
     return (
-        <div className='min-h-[clac(100vh-120px)] lg:my-30 my-10'>
-           <div className="text-center mb-16 space-y-4">
+        <div className='min-h-[clac(100vh-120px)] lg:my-30 mt-30 sm:mt-0 mb-10 sm:mb-0 '>
+           <div className="text-center mb-16 space-y-4 px-5 ">
               <h1 className="lg:text-6xl text-4xl font-black tracking-tighter text-slate-900 uppercase">
                 All Products
               </h1>

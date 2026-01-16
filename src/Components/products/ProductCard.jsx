@@ -24,7 +24,7 @@ const ProductCard = ({ product }) => {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
-      whileHover={{ y: -5 }} // Subtle lift on hover
+      whileHover={{ y: -5 }} 
       viewport={{ once: true, margin: "-50px" }}
       transition={{ 
         duration: 0.5, 
@@ -38,15 +38,14 @@ const ProductCard = ({ product }) => {
       <div className="relative w-full h-48 bg-slate-50 dark:bg-slate-800 overflow-hidden">
         <Link href={`/product/${_id}`}>
           <motion.img
-            whileHover={{ scale: 1.1 }} // Smooth image zoom
+            whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.6, ease: [0.33, 1, 0.68, 1] }}
             src={image}
             alt={title}
             className="object-cover w-full h-full"
           />
         </Link>
-        
-        {/* Auto 20% Badge with Entrance Animation */}
+   
         {!isSoldOut && (
           <motion.span 
             initial={{ x: -20, opacity: 0 }}
@@ -74,10 +73,8 @@ const ProductCard = ({ product }) => {
           </motion.div>
         </div>
 
-        <h3 className="text-sm font-bold text-slate-800 dark:text-white line-clamp-1 mb-2">
-          <Link href={`/product/${_id}`} className="hover:text-blue-600 transition-colors">
+        <h3 className="md:text-sm text-xs font-bold text-slate-800 dark:text-white mb-2">
             {title}
-          </Link>
         </h3>
         
         {/* 3. Compact Price Row */}
