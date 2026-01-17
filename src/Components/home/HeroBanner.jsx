@@ -79,7 +79,7 @@ const HeroBanner = () => {
           <motion.div variants={itemVariants}>
             <Link
               href={"/products"}
-              className="group relative w-64 py-3 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-black hover:border hover:border-gray-400 active:scale-95 font-bold text-lg overflow-hidden transition-all flex justify-center items-center"
+              className="group relative w-64 py-3 bg-blue-600 text-white rounded-lg hover:bg-white hover:text-blue-600 hover:border hover:border-gray-200 active:scale-95 font-bold text-lg overflow-hidden transition-all flex justify-center items-center"
             >
               <span className="relative z-10 flex items-center gap-2">
                 Explore Collection

@@ -3,6 +3,7 @@
 import { createProduct } from '@/actions/server/createNewItem';
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FiPackage, FiImage, FiTag, FiDollarSign, FiLayers } from 'react-icons/fi';
 
 const AddNewItem = () => {
     const [loading, setLoading] = useState(false);
@@ -20,23 +21,16 @@ const AddNewItem = () => {
         setLoading(false);
 
         if (result.success) {
-            alert("Product created successfully!");
-            e.target.reset();
             setImageUrl("");
+            e.target.reset();
         } else {
             alert("Error: " + result.error);
         }
     };
 
-    // Animation Variants
     const containerVariants = {
         hidden: { opacity: 0 },
-        visible: {
-            opacity: 1,
-            transition: {
-                staggerChildren: 0.1
-            }
-        }
+        visible: { opacity: 1, transition: { staggerChildren: 0.1 } }
     };
 
     const itemVariants = {
@@ -49,17 +43,26 @@ const AddNewItem = () => {
             initial="hidden"
             animate="visible"
             variants={containerVariants}
-            className="max-w-4xl mx-auto p-4"
+            className="max-w-4xl mx-auto"
         >
-            <form onSubmit={handleSubmit} className="space-y-8">
+            <div className="mb-8">
+                <h1 className="text-2xl font-black text-slate-900 dark:text-white uppercase tracking-tight">Add New Product</h1>
+                <p className="text-slate-500 dark:text-slate-400 text-sm">Fill in the details below to list a new item in AuraMart.</p>
+            </div>
+
+            <form onSubmit={handleSubmit} className="space-y-6">
                 
                 {/* Image Section */}
-                <motion.div variants={itemVariants} className="bg-blue-50/50 p-6 rounded-2xl border-2 border-dashed border-blue-100">
-                    <label className="text-sm font-bold text-blue-900 uppercase tracking-wider">Product Imagery</label>
-                    <div className="mt-4 flex flex-col md:flex-row gap-6 items-center">
+                <motion.div variants={itemVariants} className="bg-white dark:bg-[#1D232A] p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm">
+                    <div className="flex items-center gap-2 mb-4">
+                        <FiImage className="text-blue-600" />
+                        <label className="text-xs font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">Product Imagery</label>
+                    </div>
+                    
+                    <div className="flex flex-col md:flex-row gap-6 items-center">
                         <motion.div 
                             whileHover={{ scale: 1.02 }}
-                            className="w-full md:w-48 h-48 bg-white rounded-xl border border-gray-200 flex items-center justify-center overflow-hidden shadow-inner relative"
+                            className="w-full md:w-48 h-48 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-200 dark:border-slate-700 flex items-center justify-center overflow-hidden relative"
                         >
                             <AnimatePresence mode="wait">
                                 {imageUrl ? (
@@ -79,60 +82,76 @@ const AddNewItem = () => {
                                         animate={{ opacity: 1 }}
                                         className="text-center p-4"
                                     >
-                                        <div className="text-gray-300 text-4xl mb-2">🖼️</div>
-                                        <p className="text-xs text-gray-400">No image preview</p>
+                                        <div className="text-slate-200 dark:text-slate-700 text-4xl mb-2">🖼️</div>
+                                        <p className="text-[10px] text-slate-400 dark:text-slate-500 font-bold uppercase">No Preview</p>
                                     </motion.div>
                                 )}
                             </AnimatePresence>
                         </motion.div>
                         
                         <div className="flex-1 w-full space-y-2">
-                            <label className="text-sm font-semibold text-gray-700">Image URL</label>
+                            <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Image URL</label>
                             <input 
                                 name="image"
                                 type="url" 
                                 required
                                 value={imageUrl}
                                 onChange={(e) => setImageUrl(e.target.value)}
-                                placeholder="https://images.unsplash.com/photo-..."
-                                className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 outline-none transition-all"
+                                placeholder="Paste product image link here..."
+                                className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-[#1D232A] focus:border-blue-500 outline-none transition-all text-slate-900 dark:text-white"
                             />
                         </div>
                     </div>
                 </motion.div>
 
-                {/* Form Inputs Grid */}
+                {/* Grid Inputs */}
                 <motion.div variants={itemVariants} className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm font-semibold text-gray-700">Product Title</label>
-                        <input name="title" type="text" required placeholder="Add a title" className="px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none transition-colors" />
+                    <div className="bg-white dark:bg-[#1D232A] p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                                <FiTag className="text-blue-600" size={14} />
+                                <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Product Title</label>
+                            </div>
+                            <input name="title" type="text" required placeholder="add a title" className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-[#1D232A] focus:border-blue-500 outline-none transition-all text-slate-900 dark:text-white" />
+                        </div>
+
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                                <FiLayers className="text-blue-600" size={14} />
+                                <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Category</label>
+                            </div>
+                            <select name="category" required className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-[#1D232A] focus:border-blue-500 outline-none transition-all text-slate-900 dark:text-white">
+                                <option value="">Select Category</option>
+                                <option value="electronics">Electronics</option>
+                                <option value="fashion">Fashion</option>
+                                <option value="home">Home & Living</option>
+                            </select>
+                        </div>
                     </div>
 
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm font-semibold text-gray-700">Category</label>
-                        <select name="category" required className="px-4 py-3 rounded-xl border border-gray-200 bg-white outline-none focus:border-blue-500 transition-colors">
-                            <option value="">Select Category</option>
-                            <option value="electronics">Electronics</option>
-                            <option value="fashion">Fashion</option>
-                            <option value="home">Home & Living</option>
-                        </select>
-                    </div>
+                    <div className="bg-white dark:bg-[#1D232A] p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm space-y-4">
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                                <FiDollarSign className="text-blue-600" size={14} />
+                                <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Price ($)</label>
+                            </div>
+                            <input name="price" type="number" step="0.01" required placeholder="0.00" className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-[#1D232A] focus:border-blue-500 outline-none transition-all text-slate-900 dark:text-white" />
+                        </div>
 
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm font-semibold text-gray-700">Price ($)</label>
-                        <input name="price" type="number" step="0.01" required placeholder="0.00" className="px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none transition-colors" />
-                    </div>
-
-                    <div className="flex flex-col gap-2">
-                        <label className="text-sm font-semibold text-gray-700">Stock Quantity</label>
-                        <input name="stock" type="number" required placeholder="100" className="px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none transition-colors" />
+                        <div className="flex flex-col gap-2">
+                            <div className="flex items-center gap-2">
+                                <FiPackage className="text-blue-600" size={14} />
+                                <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Stock Quantity</label>
+                            </div>
+                            <input name="stock" type="number" required placeholder="100" className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-[#1D232A] focus:border-blue-500 outline-none transition-all text-slate-900 dark:text-white" />
+                        </div>
                     </div>
                 </motion.div>
 
                 {/* Description */}
-                <motion.div variants={itemVariants} className="flex flex-col gap-2">
-                    <label className="text-sm font-semibold text-gray-700">Product Description</label>
-                    <textarea name="description" rows="4" className="px-4 py-3 rounded-xl border border-gray-200 focus:border-blue-500 outline-none transition-colors" placeholder="Description..."></textarea>
+                <motion.div variants={itemVariants} className="bg-white dark:bg-[#1D232A] p-6 rounded-2xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col gap-2">
+                    <label className="text-sm font-bold text-slate-700 dark:text-slate-300">Product Description</label>
+                    <textarea name="description" rows="4" className="w-full px-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 focus:bg-white dark:focus:bg-[#1D232A] focus:border-blue-500 outline-none transition-all text-slate-900 dark:text-white" placeholder="Describe the item features..."></textarea>
                 </motion.div>
 
                 {/* Submit Button */}
@@ -142,7 +161,7 @@ const AddNewItem = () => {
                     whileTap={{ scale: 0.98 }}
                     type="submit"
                     disabled={loading}
-                    className="w-full py-4 bg-blue-600 text-white rounded-xl font-bold text-lg hover:shadow-xl hover:shadow-blue-500/20 transition-all disabled:opacity-50 flex items-center justify-center gap-2"
+                    className="w-full py-4 bg-slate-900 dark:bg-blue-600 text-white rounded-xl font-bold text-lg hover:bg-slate-800 dark:hover:bg-blue-700 transition-all disabled:opacity-50 flex items-center justify-center gap-3 shadow-lg"
                 >
                     {loading ? (
                         <>

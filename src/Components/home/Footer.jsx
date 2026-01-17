@@ -19,11 +19,9 @@ const Footer = () => {
     if(pathname.startsWith('/login')) return <></>
 
     return (
-        <footer className="bg-gray-300 border-t border-slate-200 dark:border-slate-800 pt-20 pb-10">
-            {/* Updated to match your 1860px design requirement */}
+        <footer className="bg-gray-300 border-t border-slate-200 dark:border-slate-800 dark:text-white dark:bg-[#1D232A] pt-20 pb-10">
             <div className="container mx-auto px-5 lg:px-10 xl:px-20 max-w-465">
                 
-                {/* Top Section: Brand & Navigation */}
                 <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-16">
                     <div className="lg:col-span-4 space-y-6">
                         <h2 className="text-3xl font-black tracking-tighter text-slate-900 dark:text-white uppercase">
@@ -92,7 +90,7 @@ const Footer = () => {
                     </div>
 
                     {/* Payment Methods */}
-                    <div className="flex gap-6 grayscale opacity-50 hover:opacity-100 transition-opacity">
+                    <div className="flex gap-6 transition-opacity">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/5/5e/Visa_Inc._logo.svg" alt="Visa" className="h-4" />
                         <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard" className="h-6" />
                         <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="Paypal" className="h-4" />

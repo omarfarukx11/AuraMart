@@ -6,13 +6,12 @@ import {
     FiMail, FiPhone, FiMapPin, FiUser, 
     FiMessageSquare, FiAlertCircle
 } from 'react-icons/fi';
-import Swal from 'sweetalert2'; // Added this
-
+import Swal from 'sweetalert2'; 
 const Contact = () => {
     const [formData, setFormData] = useState({ name: '', email: '', message: '' });
     const [errors, setErrors] = useState({});
 
-    // --- REUSABLE CORNER TOAST ---
+
     const showToast = (icon, title) => {
         const Toast = Swal.mixin({
             toast: true,
@@ -47,21 +46,18 @@ const Contact = () => {
         setErrors(validationErrors);
 
         if (Object.keys(validationErrors).length === 0) {
-            // SUCCESS: Show SweetAlert in corner
             showToast('success', 'Message Sent Successfully!');
             
             setFormData({ name: '', email: '', message: '' });
         } else {
-            // ERROR: Show SweetAlert in corner
             showToast('error', 'Please fix the errors below');
         }
     };
 
     return (
         <>
-            <section className="bg-white dark:bg-slate-950 py-28">
+            <section className="bg-white dark:bg-slate-950 flex items-center justify-center pt-20 min-h-screen">
                 <div className="container mx-auto px-6">
-                    {/* --- Header --- */}
                     <motion.div
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}

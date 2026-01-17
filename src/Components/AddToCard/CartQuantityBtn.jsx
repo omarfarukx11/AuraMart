@@ -3,12 +3,11 @@
 import { updateCartQuantity, deleteCartItem } from "@/actions/server/addToCart";
 import { useState } from "react";
 import { FaTrashAlt } from "react-icons/fa";
-import Swal from "sweetalert2"; // 1. Import SweetAlert
+import Swal from "sweetalert2"; 
 
 export default function CartQuantityBtn({ item, userEmail }) {
   const [loading, setLoading] = useState(false);
 
-  // --- 2. REUSABLE CORNER TOAST ---
   const showToast = (icon, title) => {
     const Toast = Swal.mixin({
       toast: true,
@@ -27,7 +26,6 @@ export default function CartQuantityBtn({ item, userEmail }) {
     const result = await updateCartQuantity(userEmail, item.productId, change);
     if (result.success) {
       window.dispatchEvent(new Event("cartUpdate"));
-      // Show subtle toast for quantity change
       showToast('success', 'Quantity updated');
     } else {
       showToast('error', 'Update failed');
@@ -36,14 +34,14 @@ export default function CartQuantityBtn({ item, userEmail }) {
   };
 
   const handleDelete = async () => {
-    // --- 3. REPLACED confirm() WITH SWEETALERT MODAL ---
+  
     const confirmResult = await Swal.fire({
       title: "Remove item?",
       text: `Do you want to remove ${item.title || 'this item'} from your cart?`,
       icon: "warning",
       showCancelButton: true,
-      confirmButtonColor: "#ef4444", // red-500
-      cancelButtonColor: "#64748b", // slate-500
+      confirmButtonColor: "#ef4444", 
+      cancelButtonColor: "#64748b", 
       confirmButtonText: "Yes, remove it!",
       cancelButtonText: "Cancel"
     });
@@ -67,14 +65,14 @@ export default function CartQuantityBtn({ item, userEmail }) {
         <button 
           onClick={() => handleUpdate(-1)} 
           disabled={item.quantity <= 1}
-          className={`${item.quantity <= 1 ? 'text-gray-200 cursor-not-allowed' : 'text-gray-400 hover:text-black'} font-bold px-1`}
+          className={`${item.quantity <= 1 ? 'text-gray-200 cursor-not-allowed' : 'text-gray-400 '} font-bold px-1`}
         >
           -
         </button>
         <span className="font-medium text-sm w-4 text-center">{item.quantity}</span>
         <button 
           onClick={() => handleUpdate(1)} 
-          className="text-gray-400 hover:text-black font-bold px-1"
+          className="text-gray-400  font-bold px-1"
         >
           +
         </button>

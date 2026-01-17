@@ -9,11 +9,11 @@ const AllProducts = () => {
     return (
         <div className='min-h-[clac(100vh-120px)] lg:my-30 mt-30 sm:mt-0 mb-10 sm:mb-0 '>
            <div className="text-center mb-16 space-y-4 px-5 ">
-              <h1 className="lg:text-6xl text-4xl font-black tracking-tighter text-slate-900 uppercase">
+              <h1 className="lg:text-6xl text-4xl font-black tracking-tighter  uppercase">
                 All Products
               </h1>
 
-              <p className="text-slate-500 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
+              <p className="text-slate-500 dark:text-gray-300 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed font-medium">
                 Experience the perfect blend of innovation and style. Our
                 curated featured collection showcases premium essentials
                 designed to elevate your lifestyle and redefine your everyday

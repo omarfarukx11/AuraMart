@@ -12,8 +12,7 @@ export const metadata = {
 const CartPage = async () => {
     const userEmail = "admin@gmail.com"; 
     const cartItems = await getUserCart(userEmail) || [];
-    
-    // Calculate subtotal here to pass to the client
+
     const subtotal = cartItems.reduce((acc, item) => acc + (item.price * item.quantity), 0);
 
     return (

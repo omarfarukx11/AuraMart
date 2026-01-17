@@ -126,7 +126,7 @@ const Navbar = () => {
             <div className="hidden lg:flex items-center border-l pl-4 border-gray-200 space-x-3">
               {isAuth ? (
                 <>
-                  <Link href="/dashboard" className="px-5 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-bold text-sm transition-all">
+                  <Link href="/dashboard" className="px-5 py-2.5 bg-blue-600 text-white hover:bg-white hover:text-blue-600 rounded-lg hover:border hover:border-gray-200 font-bold text-sm transition-all">
                     Dashboard
                   </Link>
                   <button onClick={handleLogout} className="p-2 text-gray-400 hover:text-red-600 transition-all">
@@ -134,7 +134,7 @@ const Navbar = () => {
                   </button>
                 </>
               ) : (
-                <Link href="/login" className="px-6 py-2.5 bg-blue-600 text-white rounded-xl hover:bg-blue-700 font-bold text-sm transition-all">
+                <Link href="/login" className="bg-blue-600 hover:bg-white hover:text-blue-600 rounded-lg hover:border hover:border-gray-200 text-white px-6 py-3  font-black uppercase tracking-widest text-xs  transition-all">
                   Login
                 </Link>
               )}
@@ -175,7 +175,7 @@ const Navbar = () => {
           <div className="pt-6 border-t border-gray-100 flex flex-col space-y-4">
             {isAuth ? (
               <>
-                <Link href="/dashboard" className="flex items-center justify-center gap-2 w-full py-4 bg-blue-600 text-white rounded-2xl font-bold">
+                <Link href="/dashboard" className="flex items-center justify-center gap-2 w-full py-4 bg-blue-600 text-white hover:bg-white hover:text-blue-600 rounded-lg font-bold">
                   <FaUser /> Dashboard
                 </Link>
                 <button onClick={handleLogout} className="w-full py-4 text-red-600 font-bold bg-red-50 rounded-2xl">
@@ -183,7 +183,7 @@ const Navbar = () => {
                 </button>
               </>
             ) : (
-              <Link href="/login" className="w-full py-4 bg-blue-600 text-white text-center rounded-2xl font-bold">
+              <Link href="/login" className="w-full py-4 bg-blue-600 text-white text-center rounded-lg font-bold">
                 Login
               </Link>
             )}

@@ -13,8 +13,8 @@ const DashboardLayout = ({ children }) => {
 
   const NavContent = () => (
     <>
-      <div className="shrink-0 py-10 px-6">
-        <Link href="/" className="text-3xl font-black tracking-tighter text-slate-900 uppercase">
+      <div className="shrink-0 py-10 px-6 ">
+        <Link href="/" className="text-3xl font-black tracking-tighter  uppercase">
           AuraMart<span className="text-blue-600">.</span>
         </Link>
       </div>
@@ -28,7 +28,6 @@ const DashboardLayout = ({ children }) => {
           <FaArrowLeft size={14} /> Back to Home
         </Link>
 
-        {/* Add New Item - Flat Blue Style */}
         <Link
           href="/dashboard"
           className="flex items-center gap-3 bg-blue-600 text-white p-4 rounded-xl font-bold hover:bg-blue-700 transition-all"
@@ -40,15 +39,14 @@ const DashboardLayout = ({ children }) => {
   );
 
   return (
-    <div className="flex min-h-screen bg-gray-50 max-w-465 mx-auto relative">
+    <div className="flex min-h-screen bg-gray-50 dark:bg-[#1D232A] max-w-465 mx-auto relative">
       
-      {/* 1. DESKTOP ASIDE */}
-      <aside className="hidden md:flex flex-col w-72 bg-white border-r border-gray-200 sticky top-0 h-screen">
+
+      <aside className="hidden md:flex flex-col w-72 bg-white dark:bg-[#1D232A] border-r border-gray-200 sticky top-0 h-screen">
         <NavContent />
       </aside>
 
-      {/* 2. MOBILE SLIDER */}
-      {/* Overlay - Flat dark tint */}
+
       {isSidebarOpen && (
         <div 
           className="fixed inset-0 bg-slate-900/40 z-60 md:hidden" 
@@ -56,7 +54,7 @@ const DashboardLayout = ({ children }) => {
         />
       )}
       
-      {/* Slider Menu - Border used instead of shadow */}
+
       <div className={`fixed inset-y-0 left-0 w-72 bg-white z-70 border-r border-gray-200 transform transition-transform duration-300 ease-in-out md:hidden flex flex-col ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}`}>
         <button 
           onClick={toggleSidebar}
@@ -67,9 +65,9 @@ const DashboardLayout = ({ children }) => {
         <NavContent />
       </div>
 
-      {/* 3. MAIN CONTENT AREA */}
+
       <div className="flex-1 flex flex-col min-w-0">
-        <header className="h-20 bg-white border-b border-gray-200 flex items-center justify-between px-5 md:px-8 sticky top-0 z-50">
+        <header className="h-20 bg-white border-b border-gray-200 dark:bg-[#1D232A] flex items-center justify-between px-5 md:px-8 sticky top-0 z-50">
           
           <button 
             onClick={toggleSidebar}

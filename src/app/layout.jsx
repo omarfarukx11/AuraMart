@@ -76,12 +76,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body
-      className={`${poppins.className}`}
-      >
-          <Navbar />
-
+    <html lang="en" style={{ colorScheme: 'light' }}>
+      <body className={`${poppins.className}`}>
+        <Navbar />
         <main className="min-h-screen">
           {children}
         </main>

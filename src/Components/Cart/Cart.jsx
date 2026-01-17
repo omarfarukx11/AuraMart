@@ -73,7 +73,6 @@ const Cart = ({ cartItems, userEmail, subtotal }) => {
                             </AnimatePresence>
                         </div>
 
-                        {/* ADDED: More Shopping Button */}
                         <motion.div 
                             initial={{ opacity: 0 }}
                             animate={{ opacity: 1 }}
@@ -89,7 +88,7 @@ const Cart = ({ cartItems, userEmail, subtotal }) => {
                         </motion.div>
                     </div>
 
-                    {/* Right Side: Order Summary */}
+
                     <motion.div 
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}

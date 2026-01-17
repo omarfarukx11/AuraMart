@@ -5,7 +5,6 @@ import { motion } from 'framer-motion';
 import { FaAward, FaLeaf, FaUsers } from 'react-icons/fa';
 
 const OurStory = () => {
-    // Stagger animation for the values at the bottom
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: {
@@ -22,7 +21,6 @@ const OurStory = () => {
             <div className="container mx-auto px-5 md:px-10 max-w-465 xl:px-20">
                 <div className="grid lg:grid-cols-2 gap-16 xl:gap-24 items-center">
                     
-                    {/* Left Side: Visuals */}
                     <motion.div 
                         initial={{ opacity: 0, x: -50 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -34,7 +32,7 @@ const OurStory = () => {
                         <motion.div 
                             whileHover={{ scale: 1.02 }}
                             transition={{ duration: 0.5 }}
-                            className="relative z-10 rounded-3xl overflow-hidden shadow-2xl border border-white/20"
+                            className="relative z-10 rounded-2xl overflow-hidden shadow-2xl border border-white/20"
                         >
                             <img 
                                 src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=2071&auto=format&fit=crop" 

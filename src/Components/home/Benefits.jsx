@@ -8,6 +8,7 @@ import { PiShippingContainerThin } from "react-icons/pi";
 import { TbTruckReturn } from "react-icons/tb";
 import { BiSupport } from "react-icons/bi";
 import { MdPayment } from "react-icons/md";
+import Link from 'next/link';
 
 const Benefits = () => {
   // Animation Variants for the Feature Icons
@@ -28,7 +29,7 @@ const Benefits = () => {
     <section className="py-24 bg-white dark:bg-slate-950">
       <div className="max-w-465 mx-auto px-5 xl:px-20 md:px-10">
         
-        {/* Modern Bento Promo Grid */}
+ 
         <div className="grid lg:grid-cols-3 gap-6 mb-20">
           
           {/* Main Hero Promo */}
@@ -37,7 +38,7 @@ const Benefits = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
             viewport={{ once: true }}
-            className="lg:col-span-2 relative group rounded-3xl overflow-hidden bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 flex flex-col md:flex-row items-center"
+            className="lg:col-span-2 relative group rounded-2xl overflow-hidden bg-gray-50 dark:bg-slate-900 border border-gray-100 dark:border-slate-800 flex flex-col md:flex-row items-center"
           >
             <div className="flex-1 p-10 z-10">
               <span className="text-blue-600 font-black uppercase tracking-[0.3em] text-xs">New Arrival</span>
@@ -46,12 +47,12 @@ const Benefits = () => {
               </h2>
               <motion.button 
                 whileTap={{ scale: 0.95 }}
-                className="bg-slate-900 dark:bg-blue-600 text-white px-8 py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:bg-blue-600 dark:hover:bg-white dark:hover:text-blue-600 transition-all"
+                className="bg-blue-600 hover:bg-white hover:text-blue-600 rounded-lg hover:border hover:border-gray-200 text-white px-8 py-4  font-black uppercase tracking-widest text-xs  transition-all"
               >
-                Explore Collection
+                <Link href={'/products'}>Explore Collection</Link>
               </motion.button>
             </div>
-            <div className="flex-1 relative w-full h-[300px] md:h-full min-h-[400px] overflow-hidden">
+            <div className="flex-1 relative w-full h-75 md:h-full min-h-100 overflow-hidden">
               <Image
                 src={serum}
                 alt="AuraMart Premium Serum"
@@ -68,7 +69,7 @@ const Benefits = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
             viewport={{ once: true }}
-            className="relative group rounded-3xl overflow-hidden bg-blue-600 p-10 flex flex-col justify-between text-white"
+            className="relative group rounded-2xl overflow-hidden bg-blue-600 p-10 flex flex-col justify-between text-white"
           >
             <div className="z-10">
               <motion.h3 
@@ -85,13 +86,7 @@ const Benefits = () => {
               <p className="text-blue-50 font-medium mb-6">
                 Makeup with extended range in colors for every human.
               </p>
-              <motion.button 
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                className="w-full bg-white text-blue-600 py-4 rounded-xl font-black uppercase tracking-widest text-xs hover:shadow-lg transition-all"
-              >
-                Shop The Sale
-              </motion.button>
+             
             </div>
             
             {/* Abstract Decorative Circle */}

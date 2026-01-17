@@ -62,7 +62,7 @@ const FAQ = () => {
                             <motion.button 
                                 whileHover={{ scale: 1.05 }}
                                 whileTap={{ scale: 0.95 }}
-                                className="px-8 py-4 bg-blue-600 text-white rounded-xl hover:shadow-xl hover:shadow-blue-500/20 active:scale-95 font-black uppercase tracking-widest text-xs transition-all"
+                                className="bg-blue-600 hover:bg-white hover:text-blue-600 rounded-lg hover:border hover:border-gray-200 text-white px-8 py-4  font-black uppercase tracking-widest text-xs  transition-all"
                             >
                                 Contact Support
                             </motion.button>

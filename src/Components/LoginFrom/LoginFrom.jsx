@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FiLogIn, FiMail, FiLock, FiZap } from "react-icons/fi"; // Added Zap icon
+import { FiMail, FiLock, FiZap } from "react-icons/fi"; 
 import LoginImage from "../../../public/tomasz-gawlowski-YDZPdqv3FcA-unsplash.jpg";
 import { useRouter } from "next/navigation"; 
 import Swal from "sweetalert2";
@@ -50,7 +50,6 @@ const LoginFrom = () => {
     setEmail(MOCK_USER);
     setPassword(MOCK_PASS);
     
-
     setTimeout(() => {
       Cookies.set("auth", "true", { expires: 7, path: '/' });
       window.dispatchEvent(new Event("authChange"));
@@ -61,8 +60,8 @@ const LoginFrom = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
-      <div className="relative flex flex-col md:flex-row bg-white dark:bg-slate-900 shadow-2xl rounded-3xl overflow-hidden max-w-5xl w-full">
+    <div className="min-h-screen flex items-center justify-center bg-slate-50 px-4">
+      <div className="relative flex flex-col md:flex-row bg-white shadow-2xl rounded-3xl overflow-hidden max-w-5xl w-full">
         
         <motion.div
           initial={{ opacity: 0, x: -50 }}
@@ -70,7 +69,7 @@ const LoginFrom = () => {
           className="flex flex-col justify-center p-8 md:p-16 lg:w-1/2"
         >
           <h1 className="text-4xl font-black text-blue-600 uppercase tracking-tighter mb-2">
-            AuraMart<span className="text-slate-900 dark:text-white">.</span>
+            AuraMart<span className="text-slate-900">.</span>
           </h1>
           <p className="text-slate-500 mb-8 font-medium">
             Enter your details or use the quick login button below.
@@ -86,8 +85,10 @@ const LoginFrom = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="admin@gmail.com"
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white"
+                  /* CHANGED PLACEHOLDER */
+                  placeholder="Type your email"
+                  /* Removed dark:bg-slate-800, dark:border-slate-700, dark:text-white */
+                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none transition-all text-slate-900"
                 />
               </div>
             </div>
@@ -101,8 +102,10 @@ const LoginFrom = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  placeholder="••••••••"
-                  className="w-full pl-12 pr-4 py-4 bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none transition-all dark:text-white"
+                  /* CHANGED PLACEHOLDER */
+                  placeholder="Type your password"
+                  /* Removed dark:bg-slate-800, dark:border-slate-700, dark:text-white */
+                  className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-blue-600 outline-none transition-all text-slate-900"
                 />
               </div>
             </div>
@@ -110,12 +113,12 @@ const LoginFrom = () => {
             <div className="flex flex-col gap-3 pt-2">
               <button
                 type="submit"
-                className="w-full flex items-center justify-center gap-3 bg-slate-900 dark:bg-white dark:text-slate-900 text-white font-bold py-4 rounded-xl hover:bg-slate-800 transition-all shadow-lg active:scale-95 group"
+                /* Removed dark:bg-white dark:text-slate-900 */
+                className="w-full flex items-center justify-center gap-3 bg-slate-900 text-white font-bold py-4 rounded-xl hover:bg-slate-800 transition-all shadow-lg active:scale-95 group"
               >
                 Sign In
               </button>
 
-              {/* QUICK MOCK LOGIN BUTTON */}
               <button
                 type="button"
                 onClick={handleQuickLogin}
