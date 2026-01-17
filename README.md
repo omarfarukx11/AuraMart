@@ -1,4 +1,5 @@
 # AuraMart - Premium E-Commerce Marketplace
+<img width="1885" height="890" alt="Screenshot 2026-01-16 210342" src="https://github.com/user-attachments/assets/c36972e3-f905-43be-8343-db64514dbcdd" />
 
 **AuraMart** is a modern, full-stack e-commerce platform designed to offer a seamless shopping experience similar to Amazon and Shopify. Built with a focus on speed, beautiful UI, and intuitive user flows, AuraMart allows users to browse products, manage a dynamic shopping cart, and checkout securely.
 
@@ -55,7 +56,7 @@
 
 1. **Clone the project:**
    ```bash
-   git clone (https://github.com/omarfarukx11/AuraMart.git)
-   cd auramart
+   git clone https://github.com/omarfarukx11/AuraMart.git
+   
 2 . **Install dependencies:**
     npm install 
