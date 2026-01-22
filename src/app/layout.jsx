@@ -27,6 +27,12 @@ export const metadata = {
 
   applicationName: "AuraMart",
 
+  // --- ADDED VERIFICATION HERE ---
+  verification: {
+    google: "3ehqF3oKq4sNpxsjcamOLh_uLfwU1Nbb7lQbFYnTx_g",
+  },
+  // -------------------------------
+
   keywords: [
     "AuraMart",
     "premium online shopping",
@@ -48,7 +54,7 @@ export const metadata = {
     url: "https://aura-mart-five.vercel.app/",
     images: [
       {
-        url: "https://i.ibb.co.com/Fq3K2z5P/image.png", // Your provided website image
+        url: "https://i.ibb.co.com/Fq3K2z5P/image.png",
         width: 1200,
         height: 630,
         alt: "AuraMart Official Store Preview",
